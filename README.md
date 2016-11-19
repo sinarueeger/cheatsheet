@@ -1,6 +1,7 @@
-# Cookbook-R
+# how/to/s and cheatsheets
 Old and new snippets
 
+<<<<<<< HEAD
 useR 2011 notes
 
 
@@ -47,3 +48,8 @@ scp -r  /Users/admin/Documents/Studies/Reports/final-thesis/* srueger@hpc1.chuv.
 scp -r /Users/admin/Documents/* sina@neve.unil.ch:/h-sara0/sina/backup_mac/
 ```
 
+=======
+bash stuff
+
+useR 2011 notes
+>>>>>>> c33fc8ae88cddec0120413223c4372581398f45e
