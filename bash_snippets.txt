@@ -1,0 +1,256 @@
+///////////////////////////
+B A S H   S N I P P E T S
+///////////////////////////
+
+nice
+----
+
+nice -n 10 /h-sara0/sina/software/R-3.1.0/bin/Rscript  foo.R
+
+check users on hpc
+-----------------
+qstat -f -u '*'
+
+
+access server
+-----------------
+
+  ssh sina@lea.unil.ch
+
+
+run emacs within X
+-----------------------
+
+  ssh -X sina@lea.unil.ch
+
+  then type "emacs" in shell
+
+
+run plink on server
+-----------------------
+
+  go into folder where data is, then access plink via:
+  ./../plink/plink-1.07-x86_64/plink
+
+from projects-data
+plinkpath="./../../../Software/plink/plink-1.07-x86_64/plink --noweb"
+
+$plinkpath --file CoLaus200Genes
+
+
+copy folders
+------------------
+
+  cp -r /home/zoltan/colaus_500exomes/ projects
+
+
+
+PDF Latex
+* --------------------
+
+find -name '*.tex' -maxdepth 1 -exec pdflatex {} \;
+
+
+
+REPLACE FILENAME
+* --------------------
+
+for f in `find . -name '*replaceme.jpg'` ; do mv $f ${f/replaceme/withme}; done
+
+* rename
+* ---------
+mv oldname newname
+
+* make executable
+*------------------
+chmod +x <filename>
+
+* find tilde files
+* --------------------
+
+find ./ -name '*~' -print
+
+
+* remove tilde files
+* --------------------
+
+find ./ -name '*~' -exec rm '{}' \; -print
+
+
+* search for a word
+* ------------------
+grep -R "\paragraph" *
+
+
+* wmf 2 pdf
+* ----------------
+for i in *.wmf ; do convert "${i%%.*}".wmf "${i%%.*}".pdf ; done
+
+
+copy from local to server
+* ----------------------------
+scp Documents/DGM/settings_dgm.R sina@maggi.unil.ch:/home/sina/projects/
+
+http://answers.yahoo.com/question/index?qid=20090420012034AAsX0Sq
+
+
+copy from server to local
+* ----------------------------
+scp sina@maggi.unil.ch:/home/sina/projects/ Documents/DGM/settings_dgm.R
+
+
+open R on the server
+----------------------
+/home/sina/software/R-2.15.2/bin/R
+
+install r package
+-------------------
+sudo apt-get install r-cran-rgl
+
+pdfcrop - zuschneiden
+------------------------
+pdfcrop --margins "-10 -20 -50 -10" --clip old.pdf new.pdf
+
+
+imagemagick
+---------------c
+ convert -density 300 -depth 8 -quality 85 plots-overall-qqplot.pdf plots-overall-qqplot.png
+
+paste pdfs together
+----------------------
+
+convert file1.pdf file2.pdf file3.pdf out.pdf
+pdftk file1.pdf file2.pdf file3.pdf cat output out.pdf
+
+mount
+----------
+
+mount -t cifs maya.unil.ch:/home3 /home/sina/Documents/Mount -o uid=1000,gid=1000,username=sina 
+
+change folder permissions 
+------
+chmod 777 -R
+
+
+install R on server
+---------------------
+download tar.gz file 
+enzip with tar -zxvf data.tar.gz
+
+run (on LEA!!!!)
+cd R...
+
+./configure
+make
+
+within that R folder
+
+change in /home/sina/.emacs 
+>> not in /home/sina/software/emacs!!!!
+
+ess and emacs on hpc1
+----------------------
+.emacs file is in the root folder stored!!!
+
+remove 2nd column
+---------------------
+cut -c -1,3- sample.dat
+
+key password
+-----------
+Create a new keypair: (go with the defaults)
+
+ssh-keygen
+
+Copy the public key to the server: (password for the last time)
+
+ssh-copy-id user@my.server.com
+
+From now on the server should recognize your key and not ask you for the password anymore:
+
+ssh user@my.server.com
+
+
+remove tilde ~files
+----------------------
+find ./ -name '*~' -exec rm '{}' \; -print -or -name ".*~" -exec rm {} \; -print
+
+
+qsub + forloop
+———
+
+#!/bin/bash
+
+#$ -N r.estim
+#$ -S /bin/bash
+#$ -cwd
+#$ -j y
+#$ -m n
+#$ -v DISPLAY
+#$ -t 1#-20000
+
+
+# Run a threaded job using all cores in a node
+# Output is a file using the GE job id in it's name
+for R2 in {0 0.05 0.1}
+do
+    for KBETA in {1}
+#..100} 
+    do
+
+	echo $R2
+	echo $KBETA
+	/data/sgg/sina/software/R-3.1.2/bin/Rscript run_estim.R $SGE_TASK_ID $KBETA $R2
+    done
+done
+
+
+## r file
+
+args <- commandArgs(trailingOnly = TRUE)
+print(args)
+cat(args)
+#j <- 1
+j <- as.numeric(as.character(args[1]))       ## target.snp
+k.beta <- as.numeric(as.character(args[2])) ## sim run
+R2.THEO <- as.numeric(as.character(args[3])) ## r2.theo
+
+cat(k.beta, "\n")
+cat(R2.THEO, "\n")
+cat(j, "\n")
+
+
+from course in leukerbad
+------------------------
+ln -rs tmp/alignments results/alignments/original
+ln -rs tmp/variants/ results/original
+
+
+VCV FILES!!!
+-------------
+bcftools query snp.vcf -f '%CHROM\t%POS[\t%GT]\n' > snp_matrix.txt
+
+# get sample names
+bcftools query -l snp.vcf > sample_names.txt
+
+
+>>In theory, the r PopGenome can read VCF files directly, using the readVCF f
+
+
+screen 
+—————
+
+screen -ls
+screen -S sitzung1 
+screen -r sitzung1 
+screen … ## login
+ctrl+A+D ## to log out
+
+rsync
+————
+nice -n20 ionice -c 3 rsync -avz …
+
+
+nice -n20 ionice -c 3 rsync -avz --bwlimit=100000 /data/sgg/sina/ srueger@10.224.38.7:/home/srueger/archive_kuta/srueger/
+
+

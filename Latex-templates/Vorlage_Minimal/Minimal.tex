@@ -1,0 +1,64 @@
+%% Dokumentenklasse (Koma Script) -----------------------------------------
+\documentclass[%
+   11pt,              % Schriftgroesse
+   ngerman,           % wird an andere Pakete weitergereicht
+   a4paper,           % Seitengroesse
+   DIV11,             % Textbereichsgroesse (siehe Koma Skript Dokumentation !)
+]{scrartcl}%     Klassen: scrartcl, scrreprt, scrbook
+% -------------------------------------------------------------------------
+
+\usepackage[latin1]{inputenc} % Font Encoding, benoetigt fuer Umlaute
+\usepackage[ngerman]{babel}   % Spracheinstellung
+
+\usepackage[T1]{fontenc} % T1 Schrift Encoding
+\usepackage{textcomp}    % Zusatzliche Symbole (Text Companion font extension)
+\usepackage{lmodern}     % Latin Modern Schrift
+
+%% Dokument Beginn %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+\section{Mixed-Models}
+
+\begin{equation}
+Y=\mu+Group+Cond+Test+ID+Cond:Test+Cond:Group+Test:Group+ID+\epsilon
+\end{equation}
+
+Factor \emph{ID} is nested in \emph{Group}. \emph{Group}, \emph{Test}, \emph{Cond} are crossed factors. \emph{Group} is therefore a between-subject factor, \emph{Cond} and \emph{Test} are within-subject factors. 
+
+\begin{verbatim}
+taste product + age + gender + Wechselwirkungen + Error(subject), 
+data=datA 
+mod <- aov(taste ~ (product + age + gender)^2 + Error(subject), data = datA) 
+#Error: subject 
+# Df Sum Sq Mean Sq F value Pr(>F) 
+#age 2 51.9 26.0 3.1313 0.04449 * 
+#gender 1 6.8 6.8 0.8231 0.36470 
+#age:gender 2 3.8 1.9 0.2295 0.79498 
+#Residuals 513 4251.9 8.3 
+#--- 
+#Signif. codes: 0 Ô***Õ 0.001 Ô**Õ 0.01 Ô*Õ 0.05 Ô.Õ 0.1 Ô Õ 1 
+# 
+#Error: Within 
+# Df Sum Sq Mean Sq F value Pr(>F) 
+#product 3 567.3 189.1 63.4361 <2e-16 *** 
+#product:age 6 16.5 2.7 0.9207 0.4788 
+#product:gender 3 3.0 1.0 0.3340 0.8008 
+#Residuals 1545 4605.3 3.0 
+\end{verbatim}
+
+
+
+\subsection{Packages in R}
+There are several possibilities in R to perform a ANOVA with more than just one errorterm. One is \texttt{aov} and the other is \texttt{lmer}. 
+
+
+\subsection*{Further Reading}
+Hedeker, D. und Gibbons, D. (2006). \emph{Longitudial Data Analysis}, John Wiley \& Sons, Inc. (Repeated Measures ANOVA, chapter 1 bis 4)\\
+Montgomery, D. (2005). \emph{Design and Analysis of Experiments}, John Wiley \& Sons, Inc. (Repeated Measures ANOVA, Split-Plot-Models, chapter 13 und 14 und 15.4)
+Pinheiro, J. C. und Bates, D. (2000). \emph{Mixed-effects models in S and S-Plus}, Springer-Verlag New York, Inc.
+
+
+%% Dokument ENDE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+

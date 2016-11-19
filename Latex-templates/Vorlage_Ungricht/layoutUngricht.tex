@@ -1,0 +1,88 @@
+\documentclass[a4paper,10pt, leqno]{scrartcl}                  % Siehe f{\"u}r spezielle Anwendungen scrguide.pdf
+
+% ftp.dante.de/tex-archive/macros/latex/contrib/koma-script/scrguide.pdf
+
+\usepackage[ngerman]{babel}
+%\usepackage{textcomp}
+\usepackage[ansinew]{inputenc}
+
+%\usepackage[dvips]{graphicx}  % cf. p 63 und 73
+%\usepackage{graphics}
+%\usepackage{epsfig}
+%\usepackage{float}
+
+%\usepackage{epsf}
+%\usepackage{epsfig}
+%\usepackage{graphicx}
+
+%\usepackage{graphicx}
+
+%\usepackage{fancyhdr}
+%\usepackage{amscd}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage[a4paper, left=3cm, right=3cm, top=3.5cm,    % Hier lassen sich die Randabst{\"a}nde einstellen
+bottom=2.5cm]{geometry}
+\usepackage[german]{varioref}                           % F{\"u}r Verweise mit deutschem Text
+\usepackage{rawfonts}
+
+
+%\usepackage[all]{xy}           % für Diagramme, cf. p 80 ff
+
+% Pagestyle festlegen
+% ===================
+%\renewcommand{\footrulewidth}{0.4pt}                    % F{\"u}r eine Linie am unteren Seitenrand
+%\pagestyle{fancy}%
+%\lhead{\footnotesize{MLAN1}}            % Bezeichnung des Moduls
+%\chead{\textit{\footnotesize{\leftmark}}}
+%\rhead{\footnotesize{\today}}%
+%\rhead{\footnotesize{\thepage}}%
+%\rfoot{\footnotesize \thepage}%
+%\rfoot{\small ung/ \texttt{\jobname.tex}}    % fname automatisch!
+%\cfoot{}%
+%\lfoot{\footnotesize{Y.Blattmann DP1a}}%
+%\lfoot{\footnotesize{ZHW}}
+
+\setlength{\parindent}{0cm}                             % Es wird kein Einzug im Neuen Absatz gemacht
+%\setlength{\parskip}{1.5ex plus 0.5ex minus 0.5ex}     % Ein Variabler Abstand zwischen den Abs{\"a}tzen
+
+% Grafik einbinden Syntax: (Prozent der Breite, Name des File, Beschriftung, Label)
+% m{\"o}gliche Formate sind .jpeg .tiff .png
+% =================================================================================
+\newcommand{\fig}[4]{%
+    \begin{figure}[hbt!]                                % h = here, t = top, b = bottom, p = page
+        \centering
+        \includegraphics[width=#1\textwidth]{#2}
+        \caption{\textit{\footnotesize{#3}}}
+        \label{#4}
+    \end{figure}
+}
+
+% Neue Definitionen:
+% ==================
+\newcommand{\dif}{\,\mbox{d}}                           % F{\"u}r ein gerades d bei integral von dx
+\newcommand{\difq}[2]{\frac{\dif #1}{\dif #2}}          % Ableitungskoeffizient z.B dy/dt
+\newtheorem{satz}{Satz}[section]                        % Aufz{\"a}hlungen, orientieren sich an der Sectionnummer
+\newtheorem{kor}{Korollar}[section]
+\newtheorem{Def}{Definition}[section]
+\newtheorem{Fig}{Figur}[section]
+\newtheorem{folg}{Folgerungen}[section]
+\newtheorem{aufg}{Aufgabe}[section]
+\newtheorem{loes}{L\"osung}[section]
+\newtheorem{bsp}{Beispiel}[section]
+\newtheorem{vor}{Vorgabe}[section]
+\newtheorem{bem}{Bemerkung}[section]
+\newtheorem{fra}{Frage}[section]
+\newtheorem{ges}{Gesucht}[section]
+\newcommand{\mL}{{\mathbf L}}
+\newcommand{\N}{{\mathbb N}}                            % Zahlenmengen
+\newcommand{\C}{{\mathbb C}}
+\newcommand{\Q}{{\mathbb Q}}
+\newcommand{\R}{{\mathbb R}}
+\newcommand{\mS}{{\mathbb S}}
+\newcommand{\V}{{\mathbb V}}
+\newcommand{\Z}{{\mathbb Z}}
+
+% dieses File kann mit \include{layout} eingebunden werden und enth{\"a}lt den ganzen Header!
+
+% written by Yves Blattmann 02.06.04

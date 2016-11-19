@@ -1,0 +1,2219 @@
+ \documentclass[11pt, a4paper, numbers=noenddot, parskip=half]{scrreprt} %scrartcl}
+%10pt,twoside,smallheadings,leqno,numbers=noenddot,BCOR8mm,DIV11, parskip=half*]
+%parskip=half mach einen halben Zeile Abstand nach einem Absatz, dafr keinen Einzug. Mit half+ muss die letzet Zeile min. 1/4 leer sein.
+%{scrreprt}
+
+%lenqno setzt gleichungsnummern links
+%BCOR8.25mm, Rand, der durch bindung verdeckt wird %DIV10 Verlthnis der Rnder, DIVcalc berechnet DIV
+
+\usepackage[T1]{fontenc}		% richtige Zeichenkodierung
+\usepackage{lmodern}			% sonst gibts mit \usepackage[T1]{fontenc} bitmap-schriften
+
+\usepackage[german]{babel}		%deutsche silbentrennung
+\usepackage{graphicx} 			%zum graphiken einbinden
+\usepackage{latexsym}
+\usepackage{amssymb}			%mehr mathe-symbole
+\usepackage{amsmath}
+\usepackage{color}
+\usepackage{microtype}			%Schneren Satz 
+\usepackage{ellipsis}			%Korrekte Abstnde bei Auslassunsgzeichen (\dots)
+\usepackage{textcomp}			%fr Celsiussymbol
+\usepackage{tabularx}			%fuer Tabellenumgebung
+\usepackage{pdfpages}			%kann mit pdfpage{xxx.pdf} pdfs einbinden
+\usepackage{enumitem} 			%um Aufzhlungen anzupassen
+\usepackage{setspace}			%Zeilenabstand ndern: %Zeilenabstand ndern \begin{onehalfspacing} \begin{singlespacing}
+\usepackage{german}
+\usepackage{moreverb}
+\usepackage{alltt}
+\usepackage{ﬂoatﬁg}
+
+%\usepackage{a4wide}
+\usepackage{here}
+ \usepackage[applemac]{inputenc}
+\usepackage{color}
+\usepackage{subfig}
+
+
+\usepackage{float}                 %damit Bild an dem Ort, wo es sein soll
+\restylefloat{table} 
+
+\restylefloat{figure}              %damit Bild an dem Ort, wo es sein soll
+%[H] genau hier,  [h] etwa hier, [t] zu beginn der seite, [p] auf eigener seite
+
+\usepackage[ansinew]{inputenc}	%um Umlaute korrekt schreiben zu knnen
+
+
+\definecolor{darkblue}{rgb}{0,0,0.5}
+\usepackage[colorlinks=true,linkcolor=darkblue,urlcolor=darkblue]{hyperref}	%fuer pdf-links
+
+%Beschriftung von Abbildungen
+\usepackage[hang,small,bf]{caption}
+
+%bis auf welcher Gliederungsebene Nummerieren
+%\setcounter{secnumdepth}{1} 
+%welche Ebenen im Inhaltsverzeichniss
+%\setcounter{tocdepth}{1}
+
+%Andere Schriften
+%\usepackage{avant} 
+%\usepackage{palatino} 
+%\usepackage{bookman} 
+%\usepackage{charter} 
+%\usepackage{helvet} 
+%\usepackage[scaled=0.9]{helvet}
+\usepackage[hang,small,bf]{caption} % beschreibung der grafiken
+
+\usepackage[automark, nouppercase]{scrpage2}
+\pagestyle{scrheadings}
+\ifoot{Sina Rüeger}
+\ofoot{\pagemark}
+\cfoot{}
+
+\ohead{\headmark}
+\chead{}
+
+
+%=========================================================
+% Titel
+
+% titlepage
+% = = = = = ==
+\begin{titlepage}
+
+\begin{center}
+  {\Large Zürcher Hochschule für Angewandte Wissenschaften ZHAW\\
+  % space
+  \vspace{0.5cm}
+  Master of Science in Engineering MSE\\}
+\end{center}
+\begin{center}
+  {Sina Rüeger\\
+ sina.rueeger@gmail.com}
+\end{center}
+
+% space
+\vspace{1.5cm}
+
+\begin{center}
+  {\LARGE
+  {\bf Auswertung Konsumententest Lindt \& Sprüngli}\\}
+\end{center}
+\begin{center}
+Projektarbeit I: September bis November 2009\\
+\end{center}
+
+
+\vspace{6cm}
+
+\begin{center} 
+ Betreuerin\\[1ex]
+Prof. Dr. phil. Marianne Müller\\ 
+Zürcher Hochschule für Angewandte Wissenschaften, Winterthur\\ 
+ \end{center}
+
+%% space
+
+%\begin{tabular}{p{8cm}p{8cm}}
+% Verfasserin & Betreuerin\\[1ex]
+% Sina Rüeger & Prof. Dr. phil. Marianne Müller\\ 
+%Lindbergstrasse 21& Zürcher Hochschule für Angewandte\\ 
+%8404 Winterthur &  Wissenschaften, Winterthur\\ 
+%\href{mailto: sina.rueeger@gmail.com}{sina.rueeger@gmail.com} & \\
+% \end{tabular}
+
+
+\end{titlepage}
+
+
+
+%
+%\title{Projektarbeit\\ Auswertung Konsumententest / Programmsystem}
+%%\subtitle{}
+%\date{\today}
+%\author{Sina Rüeger\\ \href{mailto: sina.rueeger@gmail.com}{sina.rueeger@gmail.com}
+%\hskip{2cm}
+%Betreuerin:\\
+%Marianne Müller, IDP ZHAW}
+
+\begin{document}
+\initfloatingfigs
+%\maketitle
+%=========================================================
+% Abstakt
+
+\begin{abstract}
+Um bei neuen Produkten das Marktpotential abschätzen zu können, lässt die Sensorikabteilung von Lindt \& Sprüngli ausgewählte Produkte von Konsumenten testen. Die Testpersonen geben pro Produkt eine Wertung ab, die Produktereihenfolge pro Person ist randomisiert. Ein marktreifes Produkt sollte mindestens die Bewertung 8 erhalten. Um die Punktschätzungen besser beurteilen zu können, werden Vertrauensintervalle der Punktschätzungen verwendet. Um einen guten Überblick über die Schätzungen und die Vertrauensintervalle zu haben, wird eine Grafik dazu erstellt.
+
+Das Design dieser Konsumententests entspricht einem Repeated Measures, resp. einem Split-Plot Design. Bei der Analyse dieser Daten muss auf die Abhängigkeit der Bewertungen innerhalb einer Personen geachtet werden, weil sonst die Effekte durch falsch F-Tests nicht richtig interpretiert werden können. Diese Projektarbeit zeigt die Methoden zur Analyse von Repeated Measures Daten auf. Dabei gibt es einige Herausforderungen wie die Analyse von einem unbalancierten Design, Datensätze mit fehlenden Werten, die Forderung einer homogenen Varianz-Kovarianzstruktur und - bei einem unbalancierten Design - die Erstellung von Vertrauensintevallen durch die Boostrap-Methode, weil die t-Werte nur approximativ t-verteilt sind.
+
+Für eine benutzerfreundliche Anwendung wird eine Routine zur Auswertung dieser Konsumententestdaten in der Statistik-Software SPSS geschrieben, mit der Konsumententest-Daten über die bisherige Auswertung hinaus standardisiert analysiert werden können. Die Auswertungen in diesem Bericht wurden mit der Software \texttt{R} erstellt.
+
+\end{abstract}
+
+
+
+\tableofcontents
+
+%=========================================================
+% Introduction
+
+\chapter{Einleitung}
+
+%===
+% Ziele / Fragestellung
+%\section{Ziele und Fragestellung}
+Um bei neuen Produkten das Marktpotential abschätzen zu können oder um herauszufinden, ob ältere Produkte noch Anklang finden, lässt die Sensorikabteilung von Lindt \& Sprüngli ausgewählte Produkte von Konsumenten testen. Die Testpersonen geben pro Produkt eine Wertung ab, die Produktereihenfolge pro Person ist randomisiert. Es handelt sich um wiederholte Wertungen einer Person die als abhängig voneinander betrachtet werden. Die Struktur eines solchen Datensatzes wird auch \emph{Repeated Measures}, \emph{Longitudinal} oder \emph{Cross-over} genannt.
+
+Der Datensatz für die Bewertung von $J$ Produkten kann in drei Variablengruppen aufgeteilt werden. Weil die erklärenden Variablen alle kategoriell sind, werden sie auch \emph{Faktoren} genannt. Es gibt \emph{between-subject} Faktoren, wie beispielsweise das Alter oder das Geschlecht, die sich pro Person ändern und in einen \emph{within-subject} Faktor, das Produkt, welcher sich bei jeder Person wiederholt.
+
+\begin{table}[H]
+\begin{tabular}{|c|ccc|c|c|} 
+\hline
+ \emph{subject} & & \emph{within-subject} & & \emph{between-subject} & \emph{between-subject}\\
+\hline
+Subject & Produkt 1 & $\dots$ & Produkt $J$ & Geschlecht & Alter\\
+\hline 
+Person 1  & \emph{10} & $\dots$ & \emph{7} & weiblich & -34\\
+$\vdots$  & $\vdots$ & $\ddots$ & $\vdots$ & $\vdots$ & $\vdots$\\
+Person $N$  & \emph{3} & $\dots$ & \emph{8} & männlich & 55-\\
+\hline
+\end{tabular} 
+\caption{Datensatzstruktur von Lindt \& Sprüngli mit der Unterteilung in \emph{within-subject} und \emph{between-subject} Faktoren.} 
+\label{table_datensatz} 
+\end{table} 
+
+Repeated Measures Datensätze können schematisch als Split-Plot wie in der Tabelle \ref{table_splitplot} dargestellt werden. Das Split-Plot Design entstand durch Feldversuche\footnote{Plot engl. Landstück}. Ein konkretes Beispiel: Für ein Experiment steht ein grosses Feld zur Verfügung. Es sollen 4 Maissorten und 3 Bewässerungstechniken getestet werden. Das Feld wird in 8 Rechtecke unterteilt. Jedes Rechteck wird widerum in 3 Teile unterteilt, sogenannte \emph{Main-Plots}. Pro Main-Plot werden die Maissorten randomisiert zugeteilt. Dann wird jedem Main-Plot wird in 4 Teile unterteilt, sogenannte \emph{Sub-Plots}. Innerhalb jedes Main-Plots wird jedem Sub-Plot randomisiert eine Bewässerungstecknik zugeteilt. Die Beobachtungen innerhalb eines Main-Plots werden als abhängig voneinander betrachtet. Diese zweistufige Randomisierung muss von der vollständigen Randomisierung unterschieden werden. Bei einer vollständigen Randomisiertung wird das Rechteck zwar auch in 12 Teile unterteilt, aber jedem Rechteck wird zufällig eine Maissorte und eine Bewässerungstechnik zugeteilt. Die Ordnung in Main- und Sub-Plots geht also verloren. 
+
+Bei Split-Plot Experimenten ist oft vom Agrar-Vokabular die Rede (Feldern, Pflanzen, Sorten, Techniken, Bewässerung, ...). Bei Repeated Measures geht es um Soziologie, Psychologie, Pharmazie, Medizin (Menschen, Behandlungen, Produkte). Obwohl diese zwei Designs in den Anwendungsgebieten weit auseinander liegen, gibt es Paralellen. Tabelle \ref{table_splitplot}  zeigt die Übersetzung eines Split-Plot Designs auf die Repeated Measures Daten von Lindt \& Sprüngli. Wobei Rechteck $=$ Personen mit Altersgruppe $k$ und Geschlecht $h$, Main-Plots $=$ Personen und Sub-Plots $=$ Produkte. Pro Kombination von Geschlecht und Alter gibt es ein Anzahl Personen die zur Verfügung stehen. Jeder Personen wird die Produktereihenfolge randomisiert zugeteilt. Der Faktor Produkt wird auch \emph{within-subject} Faktor genannt und das Alter und das Geschlecht \emph{between-subject} Faktor. Die Personen sind die \emph{subjects}.
+
+\begin{table}[H]
+\begin{tabular}{|c|c|c|c|c|c|} 
+\hline
+& \textbf{Main-Plot} 1 & \textbf{Main-Plot} 2 & \textbf{Main-Plot} 3 & \dots\dots\dots & \textbf{Main-Plot} $N$ \\
+\hline
+& Person 1 & Person 2 & Person 3 & \dots\dots\dots & Person $N$\\
+\hline 
+\textbf{Sub-Plot} 1 & Produkt 1 & Produkt 4 & Produkt 4 & \dots\dots\dots & Produkt 1\\
+\hline 
+\textbf{Sub-Plot} 2 & Produkt 4 & Produkt 3 & Produkt 3 & \dots\dots\dots  &Produkt 5\\
+\hline 
+\textbf{Sub-Plot} 3 & Produkt 2  &Produkt 2 &Produkt 5 & \dots\dots\dots &Produkt 2\\
+\hline 
+\textbf{Sub-Plot} 4 & Produkt 5 &Produkt 5 & Produkt 1& \dots\dots\dots  &Produkt 3 \\
+\hline 
+\textbf{Sub-Plot} 5 & Produkt 1 & Produkt 2 & Produkt 2 & \dots\dots\dots & Produkt 4\\
+\hline
+\end{tabular} 
+\caption{Split-Plot Design für Alter $k$ und Geschlecht $h$, $N_{kh}$ Personen testen 5 Produkte.} 
+\label{table_splitplot} 
+\end{table} 
+
+Es gibt verschiedene Ansätze, einen solchen Datensatz zu analysieren. Weil es sich bei den erklärenden Variablen ausschliesslich um kategorielle Variablen handelt, liegt eine Varianzanalyse nahe (ANOVA, Analysis of Variance engl. Varianzanalyse).
+
+\begin{enumerate}
+	\item \textbf{ANOVA} ohne Personeneffektx\\
+	Die Varianzanalyse kann mit den Variablen Geschlecht und Alter und Produkt gemacht werden. Die Unterschiede zwischen Personen werden dabei nicht berücksichtigt.
+	\item \textbf{ANOVA mit vollständig randomisierten Blockdesign}\\
+	Die Varianzanalyse wird mit den Variablen Geschlecht, Alter, Produkt und Person gemacht. Jede Person stellt einen Block dar. Die Wertungen einer Person werden als \emph{unabhängig} voneinander betrachtet.
+	\item \textbf{Repeated Measures ANOVA}\\
+	Die Varianzanalyse wird mit den Variablen Geschlecht, Alter, Produkt und Person gemacht. Die Bewertungen einer Person werden als \emph{abhängig} voneinander betrachtet. Es gibt zwei Fehlerstreuungen. Die F-Tests für die \emph{between-subject} Faktoren werden mit der Variabilität zwischen den Personen gemacht. Die F-Tests für die \emph{within-subject} Faktoren werden mit der Variabilität innerhalb einer Person gebildet.
+\end{enumerate}
+
+Diese Projektarbeit soll darüber Aufschluss geben, welcher Ansatz nun der beste ist. Vorweg die Antwort: Repeated Measures ANOVA liefert die richtigen Resultate. Repeated Measures ANOVA behandeln die Faktoren getrennt als \emph{between-subject} und \emph{within-subject}, was schlussendlich entscheidend ist für die F-Tests. 
+
+Vergleichen wir Ansatz 1 und 2 mit dem korrekten Modell Ansatz 3. Die P-Werte der \emph{between-subject} Faktoren werden in Ansatz 1 und 2 unterschätzt. Hingegen wird der P-Wert des \emph{within-subject} Faktors in Ansatz 1 überschätzt. Die Gefahr ist also gross, dass \emph{within-subject} Effekte übersehen und \emph{between-subject} Effekte fälschlicherweise als statistisch signifikant angesehen werden. In Kapitel \ref{section: umsetzung in R} werden die Resultate dieser Modelle aufgeführt und verglichen.
+
+\begin{tabular}{|l|l|l|} 
+\hline
+& F-Wert \underline{Ansatz 1} & F-Wert \underline{Ansatz 2}\\
+& statt Ansatz 3 & statt Ansatz 3\\
+\hline 
+\emph{Within-subject} Faktor & zu klein & gleich \\
+(Produkt) &  & \\
+\hline 
+\emph{Between-subject} Faktoren & viel zu gross & viel zu gross\\
+(Alter, Geschlecht) & & \\
+\hline 
+\emph{Subject} & -  & gleich\\
+(Person) &  &\\
+\hline
+\end{tabular} 
+
+Bisher wurde als Auswertungsmethode Ansatz 1 verwendet. Der Einbezug des Personeneffekts ist einerseits wichtig wegen der Korrektheit der F-Tests. Ein anderer Aspekt ist die Messung der Variabilität zwischen den Personen. Häufig ist die Bewertung der Produkte innerhalb der Personen sehr homogen, zwischen den Personen aber heterogen. Und diese Heterogenität der Bewertungen kann nicht durch die bestehenden Faktoren erklärt werden. $\sigma_\epsilon^2$ ist die Variabilität zwischen den Bewertungen derselben Person. $\sigma_S^2$ ist die Variabilität der Bewertungen zwischen den Personen. Ist $\sigma_\epsilon^2$ kleiner als $\sigma_S^2$, ist die Streuung innerhalb der Personen tatsächlich kleiner wie zwischen den Personen. Diese zwei Fehlerterme implizieren ein \emph{Mixed Model}. Ein Repeated Measures ANOVA entspricht also sowohl einem Split-Plot Design als auch einem Mixed Model mit einem Intercept-Fehlerterm (\emph{traditionelles} Mixed Model). Aber - nicht alle Mixed Models entsprechen zwingend ein Repeated Measures ANOVA. Mixed Models können beliebig erweitert werden, beispielsweise mit einem Slope-Term.
+ 
+Zentral für die Auswertung der Lindt \& Sprüngli Daten ist vor allem eine Grafik siehe Abbildung 1.1, die die Schätzungen für Subgruppen der Konsumententestenden anzeigt, sowie Vertrauensintervalle, die den Bereich anzeigen, wo mit 95\% Wahrscheinlichkeit der wahre Wert liegt. Oder anders gesagt, wo die Wahrscheinlichkeit 95\% ist, dass man einen Balken konstruiert, in dem der wahre Wert liegt. Als Nebeneffekt soll die Analyse Faktoren indentifizieren, die einen statistisch signifikanten Effekt haben und den Personeneffekt beziffern. 
+
+% Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=5cm]{Images/lm_datA_Taste_latex.pdf}
+\label{bild:lm}
+\caption{Grafik mit den Schätzungen der Produkte als graue Flächen und schwarze Balken als Vertrauensintervalle für die Subgruppen Alter und Geschlecht}
+\end{figure}
+
+Kapitel \ref{Kapitel_Daten} beschreibt zwei Datensätze von Lindt \& Sprüngli, ein vollständigen und einen mit fehlenden Werten. Kapitel \ref{Kapitel_mgl} geht auf verschiedene Modellansätze ein und zeigt, wann welche angewendet werden. In Kapitel \ref{Kapitel_bisher} wird kurz die bisherige Auswertungsmethode ausgeführt. Kapitel \ref{Kapitel_MLM} und \ref{Kapitel_MM} widmen sich Repeated Measures ANOVA Modellen und Mixed Models. Kapitel \ref{Kapitel_bisher}, \ref{Kapitel_MLM} und \ref{Kapitel_MM} gliedern sich jeweils in einen Theorieteil, in die Umsetzung am Beispiel des Lindt \& Sprüngli Datensatzes und deren wichtigste Ergebnisse. Kapitel \ref{Kapitel_Umsetzung} geht auf die praktische Umsetzung mit \texttt{R} und SPSS ein und zeigt eine Analyse eines Teils der Lindt \& Sprüngli Daten mit dem Modell, das schlussendlich gewählt wurde. Kapitel \ref{Kapitel_Diskussion} diskutiert weitere Möglichkeiten und Änderungen, die vorgenommen werden könnten. 
+
+Vorab noch etwas Notation. Wird in diesem Bericht von einem Regressionsmodell geschrieben, wird es stets als \emph{linear} angenommen. Grundsätztlich wird versucht, deutschsprachige Begriffe zu verwenden. Falls aber der englische Ausdruck üblich ist, wird dieser englische Begriff verwendet (z.B. Mixed Model). $y_{...}$ ist der Mittelwert über alle drei Indizes, $y_{hi.}$ ist der Mittelwert des Gruppe $h$ und der Gruppe $i$ über den dritten Index. Die eckigen Klammern $\langle \ldots \rangle$ deuten auf eine Funktion hin (z.B.  \exp$\langle \ldots \rangle$).
+
+
+
+%=========================================================
+% Daten
+\chapter{Daten}
+\label{Kapitel_Daten}
+
+Der Datensatz von Lindt \& Sprüngli setzt sich aus der Wertung des Produktes (metrisch) punkto Geschmack und Beschaffenheit und erklärenden Faktoren zusammen. Faktoren sind in der Regel das Alter und das Geschlecht. Manchmal auch die Sprache, wenn der Test auch mit Einwohnern aus der französischsprachigen Schweiz durchgeführt wurde oder der Monat des Tests, wenn an verschiedenen Zeitpunkten im Jahr derselbe Test durchgeführt wurde.
+
+Beim Datensatz muss auf 3 Dinge geachtet werden, die einen Einfluss auf die Wahl des Modells haben.
+\begin{enumerate}	
+	\item Welche Faktoren sind geschachtelt, welche gekreuzt
+	\item Fehlende Werte
+	\item Balanciertes Design
+\end{enumerate}
+
+Fehlende Werte können auf zwei Arten auftauchen. Einerseits in der Zielvariable, wenn eine Person ein Produkt nicht bewertet. Andererseits in den \emph{between-subject} Faktoren, wenn eine Person beispielsweise das Alter nicht angibt.
+
+Bei der Balancierung der Daten gilt ähnliches. Für gewisse Modelle gilt die Bedingung, dass alle Personen alle Produkte testen müssen. Die Kombinationen der Faktoren wie Alter und Geschlecht können ebenfalls balanciert sein.
+
+Zusätzlich kann eine vom Produkt abhängige Variable dazukommen. Im Fall von Lindt  \& Sprüngli wäre das die Kaufabsicht vor und nach dem Testen eines Produktes. Diese kann von Produkt zu Produkt variieren. Diese Analysevariante wird im Ausblick in Kapitel \ref{Kapitel_Diskussion} besprochen.
+
+
+\newpage
+\section{Datensatz A}
+519 Personen haben jeweils 4 Produkte getestet.
+\subsubsection*{Überblick}
+\begin{tabular}{|r|r|r|} 
+\hline 
+Variable & Bedeutung\\ 
+\hline 
+\tt{Taste} & Geschmack\\
+\hline 
+\tt{Texture} & Beschaffenheit\\
+\hline 
+\tt{product} & Produkt\\
+\hline 
+\tt{subject} & Nummerierung der Testperson \\  
+\hline
+\tt{age} & Altersgruppe der Testperson\\
+\hline
+\tt{gender} & Geschlecht der Testperson\\
+\hline
+\tt{run} & Zeitpunkt des Tests\\  
+\hline
+\end{tabular}
+
+Die Variable \texttt{product} ist der \emph{within-subject} Faktor. Die Variablen \texttt{age}, \texttt{gender} und \texttt{run} sind die \emph{between-subject} Faktoren.
+
+\subsubsection*{Levels}
+\begin{itemize} 
+\item \texttt{Taste}: metrische Variable von \texttt{1} bis \texttt{10}, (ursprünglich eine kategorielle Varibable von \emph{sehr schlecht} bis \emph{sehr gut}).
+\item \texttt{Texture}: metrische Variable von \texttt{1} bis \texttt{10}, (ursprünglich eine kategorielle Varibable von \emph{sehr schlecht} bis \emph{sehr gut}).
+\item \texttt{NJ}: Nummerierung der Personen  von \texttt{1} bis \texttt{519}.
+\item \texttt{product}: 4 Pralinés, \texttt{1} bis \texttt{4}.
+\item \tt{age}: -34, 35-54, 55-
+%	\begin{itemize}
+%	\item -34
+%	\item 35-54
+%	\item 55-
+%	\end{itemize}  
+\item \tt{gender}: female, male
+%	\begin{itemize}
+%	\item female
+%	\item male
+%	\end{itemize} 
+\item \tt{run}: VT0803, VT0809
+%	\begin{itemize}
+%	\item VT0803
+%	\item VT0809
+%	\end{itemize}
+\end{itemize} 
+
+Die Faktoren \texttt{age}, \texttt{gender} und \texttt{product} und \texttt{run} sind gekreuzt. Der Faktor \texttt{subject} ist mit \texttt{product} gekreuzt und in \texttt{age} und \texttt{gender} und \texttt{run} geschachtelt.
+
+Der Datensatz ist vollständig, es gibt keine fehlenden Werte.
+
+Die Daten insofern balaciert, dass jede Person den \texttt{Taste} und \texttt{Texture} für alle 4 Produkte bestimmt hat. Pro Kombination der Faktoren \texttt{age}, \texttt{gender} und \texttt{run} sind aber unterschiedlich viele Beobachtungen vorhanden.
+
+Bei der Auswertung dieses Datensatzes werden keine Wechselwirkungen berücksichtigt, weil keine vorhanden sind.
+
+%%
+\section{Datensatz B: Fehlende Werte}
+Die 199 Testpersonen haben jeweils 8 verschiedene Produkte getestet. Nicht alle Personen haben alle 8 Produkte bewertet, es gibt fehlende Werte.
+
+\subsubsection*{Überblick}
+\begin{tabular}{|r|r|} 
+\hline 
+Variable & Bedeutung\\ 
+\hline 
+\tt{Taste} & Geschmack\\
+\hline 
+\tt{Texture} & Beschaffenheit\\
+\hline 
+\tt{subject} & Nummerierung der Testperson \\  
+\hline
+\tt{product} & Produkt\\
+\hline 
+\tt{age} & Alter der Testperson\\
+\hline
+\tt{gender} & Geschlecht der Testperson\\
+\hline
+\tt{lng} & Sprache der Testperson\\  
+\hline
+\end{tabular}
+
+Die Variable \texttt{product} ist der \emph{within-subject} Faktor. Die Variablen \texttt{age}, \texttt{gender} und \texttt{lng} sind die \emph{between-subject} Faktoren.
+
+\subsubsection*{Levels}
+\begin{itemize} 
+\item \texttt{Taste}: metrische Variable von \texttt{1} bis \texttt{10}, (ursprünglich eine kategorielle Varibable von \emph{sehr schlecht} bis \emph{sehr gut}).
+\item \texttt{Texture}: metrische Variable von \texttt{1} bis \texttt{10}, (ursprünglich eine kategorielle Varibable von \emph{sehr schlecht} bis \emph{sehr gut}).
+\item \texttt{subject}: Nummerierung der Personen  von  \texttt{1} bis \texttt{199}.
+\item \tt{product}: Coop, Frey, Cailler, Lindt CH, Lindt F, Lindt D, Aldi, Ritter
+%	\begin{itemize}
+%	\item Coop
+%	\item Frey
+%	\item Cailler
+%	\item Lindt CH
+%	\item Lindt F
+%	\item Lindt D
+%	\item Aldi
+%	\item Ritter
+%	\end{itemize}  
+\item \tt{age}: -34, 35-54, 55-
+%	\begin{itemize}
+%	\item -34
+%	\item 35-54
+%	\item 55-
+%	\end{itemize}  
+\item \tt{gender}: female, male
+%	\begin{itemize}
+%	\item female
+%	\item male
+%	\end{itemize} 
+\item \tt{lng}: german (1), french (2)
+%	\begin{itemize}
+%	\item german
+%	\item french
+%	\end{itemize}
+\end{itemize} 
+
+
+Die Faktoren \texttt{age}, \texttt{gender} und \texttt{product} und \texttt{lng} sind gekreuzt. Der Faktor \texttt{subject} ist mit \texttt{prd} gekreuzt und in \texttt{age} und \texttt{gender} und \texttt{lng} geschachtelt.
+
+Im Datensatz gibt es bei der Zielvariable fehlende Werte, als auch bei den erklärenden Variablen. Ausser einer Person, die drei Produkte nicht bewertet hat, haben alle Personen jeweils zwei Produkte nicht bewertet (ein sogenanntes \emph{Balanced Incomplete Design}). Drei Personen haben ihr Geschlecht nicht angegeben.
+
+Wenn die Zeilen mit den fehlenden Werten in der Zielvariable herausgelöscht werden, gibt es eine Unbalanciertheit im Sinn der Produkte. Pro Kombination der Faktoren \texttt{age}, \texttt{gender} und \texttt{lng} sind unterschiedlich viele Beobachtungen vorhanden.
+
+\section{Graphische Darstellung}
+\label{Kapitel_graph}
+Um sich die Daten besser vorstellen zu können oder Modellannahmen zu überprüfen, können die Daten graphisch dargestellt werden. Abbildung \ref{grafik:deskriptiv_datB_Texture_spaghetti} zeigt einen Spaghetti-Plot, wo die Wertungen einer Person mit einer Linie verbunden wird. Die Darstellung zeigt ein heterogenes Bild der Bewertungen der Personen. Die Bewertungen variieren stark, es gibt keinen klaren Trend. Produkt 2 und Produkt 8 scheinen besonders schlecht bewertet worden sein. Ansonsten bewegen sich die Wertungen eher auf höherem Niveau. 
+
+Abbildung \ref{grafik:deskriptiv_cov} bildet die Kovarianzmatrizen der Produkte ab. Die Grösse der Punkte gibt die Kovarianz wider. Die Diagonale bildet die Varianz ab. Verschiedene Modelle fordern eine Homogenität der Varianz. Die Varianz soll dabei konstant sein und die Kovarianz zwischen allen Produkten dieselbe. Bei beiden Abbildungen wird die Homogenitätsannahme nicht grob verletzt. 
+
+Der Mosaicplot in \ref{grafik:deskriptiv_datB_mosaic} zeigt das Verhältnis zwischen kategoriellen Variablen. Es hat haben mehr Frauen wie Männer am Test teilgenommen und die mittlere Altersgruppe ist mit dem grössten Anteil vertreten. Mosaicplots können beliebig erweitert werden, beispielsweise durch den Faktor Sprache. Ab mehr als drei Faktoren werden sie aber unübersichtlich.
+
+In Abbildung \ref{grafik:deskriptiv_datB_Texture_boxplot} sind Boxplots für die einzelnen Produkte dargestellt. Das Produkt von Coop und Lindt D hat eine geringere Streuung wie die Produkte. Die Lage der Produkte variiert ebenfalls ein wenig. Die Forderung der konstanten Varianz ist aber nicht verletzt. Die Box umfasst das 1. bis zum 3. Quartil. Der horizontale Strich kennzeichnet den Median. Die senkrechten Linien gehen bis zum 1. Quartil - 1.5 der Interquartilsdifferenz, resp. 3. Quartil + 1.5 der Interquartilsdifferenz. Die Interquartilsdifferenz ist die Differenz zwischen dem 3. und dem 1. Quartil. Werte, die sich ausserhalb dieses Bereichs befinden, werden als schwarze Punkte gekenn- und als Ausreisser bezeichnet. Ein Boxplot beinhaltet viel Information über die Verteilung. Die Lage des Medians gibt an, ob die Verteilung symmetrisch ist oder schief. Die Boxlänge und die senkrechten Linien geben Information über die Lage der Werte und ob die Verteilung eher kurz- oder langschwänzig ist. Werden mehrere Boxplots nebeneinander aufgeführt können die Verteilungen miteinander verglichen werden.
+
+%\begin{center}
+%\begin{figure} [H]
+%\includegraphics[width=14cm]{Images/deskriptiv_datA_Taste_spaghetti.pdf}
+%\caption{Texture: LM für das Alter, Geschlecht und Produkt}
+%\label{grafik:NJ_taste_datA}
+%\end{figure}
+%\end{center}
+
+\begin{figure} [H]
+\centering
+\includegraphics[width=9cm]{Images/deskriptiv_datB_Texture_spaghetti.pdf}
+\caption{Spaghetti-Plot der Produkte. Die Linien stellen die einzelnen Personen dar. Die Nummerierung ist wie folgt: Coop, Frey, Cailler, Lindt CH, Lindt F, Lindt D, Aldi, Ritter}
+\label{grafik:deskriptiv_datB_Texture_spaghetti}
+\end{figure}
+
+
+\begin{figure}[H] 
+    \centering 
+        \subfloat{\includegraphics[width=9cm]{Images/deskriptiv_datA_Taste_cov.pdf}} \\
+        \subfloat{\includegraphics[width=9cm]{Images/deskriptiv_datB_Texture_cov.pdf}}
+        \caption{Kovarianz der Produkte des Datensatz A für die Wertung des Geschmacks (oben) und Kovarianz der Produkte des Datensatz B für die Wertung der Beschaffenheit (unten)} 
+    \label{grafik:deskriptiv_cov} 
+\end{figure}
+%
+%\begin{center}
+%\begin{figure} [H]
+%\includegraphics[width=10cm]{Images/deskriptiv_datA_Taste_cov.pdf}
+%\caption{Kovarianz der Produkte des Datensatz A für die Wertung des Geschmacks}
+%\label{grafik:deskriptiv_datA_Taste_cov}
+%\end{figure}
+%\end{center}
+
+%\begin{center}
+%\begin{figure} [H]
+%\includegraphics[width=10cm]{Images/deskriptiv_datB_Texture_cov.pdf}
+%\caption{Kovarianz der Produkte des Datensatz B für die Wertung der Beschaffenheit}
+%\label{grafik:deskriptiv_datB_Taste_cov}
+%\end{figure}
+%\end{center}
+
+\begin{figure} [H]
+\centering
+\includegraphics[width=9cm]{Images/deskriptiv_datB_mosaic.pdf}
+\caption{Mosaicplot der Alters- und Geschlechtergruppen des Datensatz B}
+\label{grafik:deskriptiv_datB_mosaic}
+\end{figure}
+
+\begin{figure} [H]
+\centering
+\includegraphics[width=9cm]{Images/deskriptiv_datB_Texture_boxplot.pdf}
+\caption{Boxplots der Wertungen der einzelnen Produkte des Datensatz B}
+\label{grafik:deskriptiv_datB_Texture_boxplot}
+\end{figure}
+
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+% Möglichkeiten 
+
+\chapter{Modellübersicht} % auswertungsmöglichkeiten
+\label{Kapitel_mgl}
+
+Wie in der Einleitung des Berichts bereits angesprochen entstprechen die Datensätze von Lindt \& Sprüngli der Auswertung von Repeated Measures, resp. Longitudinal-Daten.  
+
+Für Longitudinal-Daten gibt es mehrere mögliche Auswertungsmöglichkeiten. \emph{Longitudinal Data Analysis} von Hedeker und Gibbons (2006) \cite{hedeker} liefert einen guten Überblick über die Möglichkeiten, ebenfalls Kapitel 13, 14 und 15.4 in \emph{Design and Analysis of Experiments} von Montgomery (2005) \cite{montgomery}.
+
+Die verschiedenen Modelle unterscheiden sich durch verschiedene Modellannahmen und die Macht des Modells. Es gibt 5 zentrale Annahmen, die variieren können.
+
+\begin{itemize}
+	\item Varianz-Kovarianz-Struktur
+	\item Umgang mit fehlenden Werten
+	\item Restriktion an die Balancierung des Designs
+	\item Verteilung der Zielvariablen
+\end{itemize}
+
+	\subsubsection*{a. ANOVA ohne Personeneffekt} 
+	Es wird eine einfache ANOVA-Tabelle berechnet, ohne Berücksichtigung des Personeneffekts. D.h. das Cross-Over-Design wird zum Cross-Sectional-Design reduziert. Produkteeffekte werden in der Regel unterschätzt und die restlichen Effekte überschätzt. Diese Variante wurde bisher angewendet und wird in Kapitel \ref{Kapitel_bisher} nochmals aufgegriffen.
+
+	\emph{Beispiel Lindt \& Sprüngli: Die Zielvariable ist der Geschmack oder die Beschaffenheit. Die erklärenden Faktoren sind die Produkte, das Alter und das Geschlecht.}
+	
+	\subsubsection*{b. Repeated Measures ANOVA}
+	Bei dem Repeated Measures ANOVA wird in der ANOVA-Tabelle der Personeeffekt berücksichtigt. Wichtig ist die Abgrenzung zum vollstängig randomisierten Design, weil die F-Tests unterschiedlich gebildet werden. Ein Repeated Measures ANOVA ist ein einfaches Mixed Model mit einem zufälligen Term. Es gilt die Homogenitätsannahme (konstante Varianz der Produkte und konstante Kovarianz zwischen den Produkten). Die Kovarianzen für ähnliche Objekte sind oft höher als für unähnliche Objekte. Details dazu in Kapitel \ref{Kapitel_MLM} oder in d. Separate Mixed Models.
+	
+	\emph{Beispiel Lindt \& Sprüngli: Die Zielvariable ist der Geschmack oder die Beschaffenheit. Die erklärenden Variablen bestehen aus festen Faktoren und einem zufälligen Faktor. Die festen Faktoren sind die Produkte, das Alter und das Geschlecht. Der zufällige Term ist der Personeneffekt. Der Personeneffekt wird als zufälliger Faktor modelliert. Die F-Tests der \emph{within-subject} (Produkte) und \emph{between-subject} (Alter, Geschlecht) Faktoren werden unterschiedlich konstruiert. }
+	
+		\subsubsection*{c. Mixed Model (Linear Mixed Effects Regressionmodel)}
+	Mixed Models sind Regressionsmodelle mit festen Effekten und einem oder mehreren zufälligen Effekten. Sie eignen sich sowohl für normalverteilte, als auch für nicht-normalverteilte Zielvariablen. Mixed Models können gut mit fehlenden Werten umgehen und können produkteab- und produkteunabhängige Faktoren beinhalten.
+	%Ein Vorteil ist, dass Missing responses ignriert werden, weil die Missings durch erklärende Variablen erkläret werden können oder durch bereits vorhandene Zielvariablen. Ein Nachteil die Berechnung, was komplex werden kann, weil es full-likelihood ist (full-likelihood = macht vollen gebraucht aus den daten von jedem subjekt).	
+	Details dazu in Kapitel \ref{Kapitel_MM}.
+	
+	\emph{Beispiel Lindt \& Sprüngli: Die Zielvariable ist der Geschmack oder die Beschaffenheit. Die erklärenden Variablen bestehen aus festen und einem oder mehreren zufälligen Faktoren. Die festen Faktoren sind die Produkte, das Alter und das Geschlecht. Der zufällige Term ist der Personeneffekt (Intercept) und der Personeneffekt innerhalb der Altersgruppen (Slope). Der Personeneffekt innerhalb einer Altersgruppe beziffert die Variabilität der Bewertungen zwischen den Personen in dieser Altersgruppe variieren.}
+
+	\subsubsection*{d. Separate Mixed Models}
+	Falls die Homogenitätsannahme verletzt wird, können die Analysen für die Produkte separat durchgeführt werden. 
+	
+	\emph{Beispiel Lindt \& Sprüngli: Es werden 4 Produkte getestet. Zwei davon sind mit Vanille versetzt und haben eine weisse Schicht, sie unterscheiden sich nur geringfügig voneinander. Die anderen zwei Produkte sind dunkel und sind mit Haselnusssplitter versetzt und schmecken nach dunkler Schokolade, sie unterscheiden sich nur geringfügig voneinander. Falls die Testpersonen in ihrer Bewertung ebenfalls Untergruppen bilden und diese ähnlich bewerten, wird die Kovarianz innerhalb der Untergruppen Vanille und Haselnuss ähnlich sein, zwischen einander aber nicht. Hier ist die Homogenitätsannahme verletzt. Eine Möglichkeit für eine Analyse bietet eine getrennte Auswertung nach Vanille und Haselnuss.}
+	
+	Diese Analyse wird nicht weiter ausgeführt.
+	
+	\subsubsection*{e. weitere Möglichkeiten}
+	Die Varianzanalyse für multivariate Zielvariablen MANOVA lässt keine Missings zu in der Zielvariable zu. Es besteht keine Homogenitätsannahme. Als weitere mögliche Modelle sind die Stichworte GEE Models oder Covariance Pattern Models gegeben. 
+		
+%\subsubsection*{Schlussfolgerung}	
+%In unserem Fall ändert keine erklärende Variable mit der Zeit, resp. dem Produkt. Im Kapitel \ref{Kapitel_Diskussion} wird dieses Thema aber diskutiert. Im ersten Datensatz sind weder fehlende Werte in der Zeilvariable, noch in den Faktoren vorhanden, im zweiten Datensatz kommt beides vor. Und die Varianz-Kovarianz-Struktur soll der Homoskedastizität entsprechen. Aus diesen Tatsachen folgt: Für den ersten Datensatz genügt ein Repeated Measures ANOVA und für den zweiten Datensatz ein Mixed Model.
+
+
+
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+% Univariates Lineares Regressionsmodell 
+
+\chapter{ANOVA ohne Personeneffekt}
+%\chapter{Reduktion auf (Univariates Lineares Regressionsmodell)}
+\label{Kapitel_bisher}
+Die einfachste Analyse beruht auf der Idee von Mittelwertvergleichen. Dabei werden Faktormittel mit dem Gesamtmittel verglichen. Sind diese quadrierten Abweichungen im Verhältnis zu den Abweichungen innerhalb eines Faktors genug gross, so ist ein Effekt vorhanden. 
+
+Seite 42 bis 45 aus \emph{Experimental Design} von Müller (2006) \cite{mllm} zeigt den Aufbau einer Varianzanalyse mit mehreren Faktoren im Detail. An dieser Stelle ein Auszug davon. 
+
+Formel (\ref{lm_F1}) enthält eine Zielgrösse $y$, das Gesamtmittel, dazu eine oder mehrere abhängige erklärende Faktorvariablen mit Wechselwirkungen und einen Fehlerterm $\epsilon$. Die erklärenden Faktoren sind gekreuzt. \\
+
+\begin{equation}
+\label{lm_F1}
+y_{ijk}= \mu + A_{i} + B_{j} + (AB)_{ij} + \epsilon_{ijk}
+\end{equation}
+
+$y_{ijk}$ ist die $k$-te Beobachtung mit Faktor $A$  auf Level $i$ und Faktor $B$ auf Level $j$, $k=1,\dots,K$\\
+$\mu$ ist das Gesamtmittel\\
+$A_i$ ist der Effekt des $i$-ten Levels des Faktors $A$, $i=1,\dots,I$\\
+$B_j$ ist der Effekt des $j$-ten Levels des Faktors $B$, $j=1,\dots,J$\\
+$(AB)_{ij}$ ist die Interaktion zwischen des $i$-ten Levels von $A$ und des $j$-ten Levels von $B$\\
+$\epsilon_{ijk}$ ist der zufällige Fehlerterm mit  $\epsilon_{ijk} \backsim \textrm{iid. } N(0,\sigma_\epsilon^2)$\\
+
+Die Nebenbedingungen sind $\sum_i A_i = \sum_j B_j = \sum_i (AB)_{ij} = \sum_j (AB)_{ij} = 0$.
+
+\subsection*{a. Fehlende Werte}
+Beobachtungen mit fehlenden Werte werden aus der Analyse ausgeschlossen.
+
+\subsection*{b. Balanciertheit}
+Die F-Tests in der ANOVA-Tabelle im nächsten Abschnitt c. ANOVA gelten nur, falls jede Faktorkombination gleich viele Replikate hat, sprich, die Daten balanciert sind. Ist das nicht der Fall ändern sich die Parameterschätzer und die ANOVA-Tabelle und damit die Schätzungen und dazugehörigen Vertrauensintervalle. 
+
+Für ANOVA treten im unbalancierten Fall drei Arten auf, wie die F-Tests zu bestimmen sind. Auf den Seiten 34 und 35 im Skript \emph{Angewandte Varianzanalyse und Versuchsplanung} von Roth (2009) \cite{roth} ist erklärt, wie sich die Zusammensetzung der Sum of Squares ändern. 
+\begin{itemize}
+	\item Typ I\\
+	Als Referenz wird immer das vorhergehende Modell verwendet, die Reihenfolge wie das Modell geschrieben wird, ist also wesentlich.
+	\item Typ II\\
+	Als Referenz dient das Modell mit allen Haupteffekten.
+	\item Typ III\\
+	Als Referenz dient das volle Modell.
+\end{itemize}
+
+Typ I wird nur verwendet, wenn ein Modell mit einer klar vorgegebenen Reihenfolge vorhanden ist. 
+%\emph{Balanciertheit = die SS sind orthogonal, unkorreliert und können zusammengezählt werden}\\
+%\emph{Unbalanciertheit = die SS sind korreliert, keine orthogonale zerlegung. Die frage ist, wie stark sie korreliert sind.}
+
+\subsection*{c. ANOVA}
+Das Modell aus \ref{lm_F1} lässt sich auch mit \emph{Sum of Squares} ausdrücken. Damit erhält man die klassische ANOVA-Tabelle, deren Nullhypothese der F-Tests ist, dass alle Levels eines Faktors gleich Null sind. Die Alternativhypothese ist, dass mindestens ein Level eines Faktors ungleich Null ist.
+
+\begin{tabular}{|l|l|p{4cm}|l|l|l|} 
+\hline 
+Faktor & df & SS & MS & E(MS) & F-Werte\\
+\hline 
+\vspace{0.25cm}
+A  & $(I-1)$ & $ $SS_{A} = \sum_i \sum_j \sum_k (y_{i..}-y_{...})^2$ & $\frac{SS_A}{I-1}$ &   & $\frac{MS_A}{MS_R}\\
+\vspace{0.25cm}
+B  & $(J-1)$ & $SS_B = \sum_i \sum_j \sum_k (y_{.j.}-y_{...})^2$ & $\frac{SS_B}{J-1}$ &  & $\frac{MS_B}{MS_R}\\
+\vspace{0.25cm}
+AB & $(I-1)(J-1)$ & $SS_{AB} = \sum_i \sum_j \sum_k (y_{ij.} -y_{i..}-y_{.j.}-y_{...})^2$ & $\frac{SS_{(AB)}}{(I-1)(J-1)}$ &  & $\frac{MS_{(AB)}}{MS_R}\\
+\vspace{0.25cm}
+R & $IJK-IJ$ & $SS_{R} = SS_{tot} - SS_A - SS_B - SS_{AB}$ & $\frac{SS_{R}}{IJK-IJ}$ & $\sigma_\epsilon^2$& \\
+Total & $IJK-1$ & SS_{Total} = $\sum_i \sum_j \sum_k (y_{ijk}-y_{...})^2$  & & & \\
+\hline 
+\end{tabular} 
+
+\subsection*{d. Schätzungen und Vertrauensintervalle}
+
+Die Schätzungen der Zielvariable entsprechen der Formel (\ref{LM_estim}), die Varianz der Schätzung wird durch die Kovarianzmatrix der Koeffizienten wie in Formel\footnote{$\beta_w$ enthält nur die Parameterschätzer aus $\widehat{y}_{hij}$} (\ref{LM_betaestim}) und (\ref{LM_estimvar}) berechnet\footnote{Die Klammern '[' und ']' fassen die Koeffizienten zu einem Vektor zusammen.}. Gemeinsam bilden die Schätzung und die Varianz das Vertrauensintervall aus Formel (\ref{LM_vi}), wobei $n$ die Anzahl Beobachtungen sind und $p$ die Anzahl geschätzter Parameter.
+
+\begin{equation}
+\label{LM_estim}
+\widehat{y}_{ijk}= \hat{\mu} + \hat{A}_{i} + \hat{B}_{j} + (\widehat{AB})_{ij}
+\end{equation}
+
+\begin{equation}
+\label{LM_betaestim}
+\beta_w = [\hat{\mu}, \hat{A}_{i}, \hat{B}_{j}, (\widehat{AB})_{ij}]
+\end{equation}
+
+\begin{equation}
+\label{LM_estimvar}
+\widehat{Var \langle y_{ijk} \rangle} = \sum_w \sum_{w'} Cov \langle \beta_w,  \beta_{w'}\rangle \qquad  \forall \quad w
+\end{equation}
+
+\begin{equation}
+\label{LM_vi}
+\widehat{y}_{ijk} \pm q^t_{1-\alpha/2, n-p} \sqrt{\widehat{Var \langle y_{ijk} \rangle}}
+\end{equation}
+
+\subsection*{e. Residuenanalyse}
+Mit der Residuenanalyse wird überprüft, ob die Residuen normalverteilt sind (Q-Q-Plot) und ob der Erwartungswert der Residuen Null ist und die Varianz konstant (Tukey-Anscombe-Plot). 
+
+% =====
+% Anwendung LS
+\section{Anwendung Lindt \& Sprüngli}
+Auf den Datensatz A und B angewendet, lässt sich Formel (\ref{lm_F1}) wie in Formel (\ref{lm_F2}) schreiben. Es werden nur die Haupteffekte eingesetzt, die Faktoren \texttt{run} und \texttt{lng} werden nicht verwendet. In diesem Modell wird der Personeneffekt nicht betrachtet. Diese Auswertung ist für die Lindt \& Sprüngli Daten zwar nicht adäquat, aber für einen Vergleich der Resultate mit den Repeated Measures ANOVA hilfreich. 
+
+\begin{equation}
+\label{lm_F2}
+T_{hijk}= \mu + P_{j} + A_{k} + G_{h} + \epsilon_{hijk}
+\end{equation}
+
+wobei:\\
+$T_{hijk}$ ist Bewertung des 'Taste', bzw. 'Texture' der $i$-ten Beobachtung mit der Altersgruppe $k$, dem Geschlecht $h$, dem Produkt $j$, $i = 0 \dots 519$\\
+$\mu$ ist das Mittel über die Beobachtungen mit Alter $k=1$, Geschlecht $h=1$, Produkt $j=1$\\
+$A_k$ ist der Effekt der $k$-ten Altersgruppe, $k=1,2,3$\\
+$G_h$ ist der Effekt des $h$-ten Geschlechts, $h=1,2$\\
+$P_j$ ist der Effekt des $j$-ten Produkt, $j=1,2,3,4$
+
+$\epsilon_{hijk} \backsim N(0,\sigma_\epsilon^2)$
+
+Die Nebenbedingungen lauten $A_1 = G_1 = P_1 = 0$.
+
+%
+\subsection{Ergebnisse}
+Das Modell für den Datensatz A hat nur Haupteffekte, jedes für den Datensatz B (im Anhang) auch Wechselwirkungen. Die restlichen Resultate sind im Anhang \ref{anhang_lm}.
+%_
+
+%% ----
+\subsubsection*{taste $\backsim$ product + age + gender, data = datA}
+\begin{alltt}
+aov(taste ~ product + age + gender , data = datA)
+
+# Analysis of Variance Table
+# ---------------------------
+# Response: Taste
+#             Df Sum Sq Mean Sq F value    Pr(>F)    
+# product      3  567.3   189.1 44.0546 < 2.2e-16
+# age          2   51.9    26.0  6.0467  0.002408
+# gender       1    6.8     6.8  1.5894  0.207549    
+# Residuals 2069 8880.4     4.3     
+\end{alltt}
+% Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=10cm]{Images/lm_datA_Taste_latex.pdf}
+\caption{Datensatz A: Schätzungen der Bewertungen des Geschmacks für das Alter, Geschlecht und Produkt}
+\label{grafik:lm_taste_datA}
+\end{figure}
+
+% =====
+% Bemerkung
+\section{Bemerkung}
+Die Anwendung der einfachen Varianzanalyse ohne Berücksichtigung des Personeneffekts ist insofern unbefriedigend, als das erstens in diesem Modell nicht alle vorhandene Information genutzt wird. Und zweitens werden die F-Werte nicht korrekt berechnet: gundsätzlich wird bei diesem Design der P-Wert des Faktor A (Altersgruppe und/oder Geschlecht) aus der ANOVA-Tabelle der Formel \ref{lm_F1} zu klein, jener von Faktor B (Produkt) zu gross. Die Punktschätzungen der Effekte sind zwar richtig, aber das Vertrauensintervall der Produkteeffekte wird zu gross, jenes der Altersgruppen und des Geschlechts zu klein.
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+% Anova
+
+\chapter{Repeated Measures ANOVA}
+\label{Kapitel_MLM}
+Bei Repeated Measures ANOVA\footnote{Weitere Bezeichnungen für Repeated Measures ANOVA: Split-Plot-Design, Univariates Mixed Model} wird zusätzlich noch der Personeneffekt als zufälliger Effekt eingeführt. Bei der Hinzunahme des Personeneffekts ist die korrekte Erkennung der Datenstruktur wichtig. Repeated Measures Modelle haben einen zweistufigen Randomisierungsprozess und daher zwei Fehlerterme, nämlich die Variabilität zwischen den Personen (\emph{between}) und die Variabilität innerhalb der Beobachtungen einer Person (\emph{within}). Die F-Tests der \emph{between-subject} Faktoren werden anders konstruiert als diejenigen der \emph{within-subject} Faktoren. Hingegen wird bei vollständig randomisierten Designs nicht zwischen \emph{between} und \emph{within} unterschieden. Mit der Hinzunahme des Personeneffekts werden zwei Dinge gewonnen: Erstens stimmen die P-Werte der F-Tests (die im vorangehenden Kapitel unter- bzw. überschätzt wurden), zweitens ist die Streuung zwischen der Personen bekannt. Weil es sich beim Personeneffekt um einen zufälligen Effekt handelt, wird das Design auch \emph{Univariates Mixed Model} genannt. Im Kapitel \ref{Kapitel_MM} werden erweiterte Mixed Model behandelt.
+
+In Kapitel 15.4 in \emph{Design and Analysis of Experiments} von Montgomery (2005) \cite{montgomery} ist ein Beispiel eines Repeated Measures ANOVA aufgeführt. Kapitel 14 zeigt Split-Plot Modelle. Kapitel 2 in \emph{Longitudinal Data Analysis} von Hedeker und Gibbons (2006) \cite{hedeker} zeigen ein \emph{einfaches} Repeated Measures Modell und die Modellstruktur eines \emph{multiplen}\footnote{Die Theorie der Repeated Measures ANOVA teilt sich in Modelle mit \emph{einem} und solche mit \emph{mehreren} festen Faktoren auf. Das Modell von Lindt \& Sprünli handelt es sich um ein \emph{multiple} Repeated Measures ANOVA.} Repeated Measures Modells. Von diesem Kapitel stammen auch die untenstehenden Ausführungen in Kapitel \ref{mlm_theorie}.
+
+
+% =====
+% Modelltheorie
+\section{Theorie}
+\label{mlm_theorie}
+Bei \emph{multiplen} Repeated Measures ANOVA gibt es im einfachsten Fall einen zufälligen und zwei feste Faktoren. Zum Beispiel: Personen (zufällig), die Produkte (fest) und eine Gruppierung (fest). Beim Personeneffekt gibt es verschiedene Gründe, weshalb man diesen Faktor als zufällig modelliert. Diese Bedingung ist einerseits durch das Repeated Measures Modell so vorgegeben. Andererseits wurden die Personen zufällig ausgewählt. Das Experiment ist also nicht reproduzierbar und genaue Parameterschätzungen pro Person machen daher keinen Sinn. Hinzu kommt, dass genaue Parameterschätzungen oft gar nicht interessieren, sondern nur, wie fest sie voneinander abweichen und das wird mit der Variabilität zwischen den Personen ausgedrückt.
+%
+%(\ref{mlm_a}) und (\ref{mlm_b}) zeigen, dass sich die Gesamtvarianz aus der Varianz zwischen den Personen und der Varianz innerhalb einer Person zusammensetzt. Die Varianz innerhalb einer Person setzt sich widerum aus der Varianz innerhalb des Treatments zusammen und dem Teil der nicht durch das Modell erklärt werden kann. Würde man den Personeneffekt nicht in das Modell mit einbeziehen, wäre $SS_{Error neu} = SS_{Error} + SS_{Between Subjects}$
+
+%\begin{equation}
+%\label{mlm_a}
+%SS_T=SS_{Between Subjects} + SS_{Within Subjects}
+%\end{equation}
+
+%\begin{equation}
+%\label{mlm_b}
+%SS_{Withinsubjects}=SS_{Treatment} + SS_{Error}
+%\end{equation}
+
+%Fokus auf Gruppenmittel und subjekt-spezifische trends.
+%wie bei jedem LS auf Ausreisser und Missings aufpassen. Kann Missings händeln.
+
+Beim Repeated Measures ANOVA Modell in der Gleichung \ref{mlm_F1} werden die Personen $S$ die ein Produkt $P$ testen einer Gruppe $G$ zugeordnet. Die Personen sind in den Gruppen geschachtelt\footnote{ Faktor A ist in Faktor B geschachtelt bedeutet, dass pro Level von Faktor B nur ein Teil der Levels vom Faktor A vorkommen.}, was durch durch die Schreibweise $S_{i(h)}$ angedeutet wird.
+
+\begin{equation}
+\label{mlm_F1}
+y_{hij}=\mu+G_h+P_j+(GP)_{hj}+S_{i(h)}+\epsilon_{hij}
+\end{equation}
+
+$y_{hij}$ ist die Beobachtung der Person $i$ in der Gruppe $h$ und dem Produkt $j$\\
+$\mu$ ist das Gesamtmittel\\
+$G_h$ ist der Effekt der $h$-ten Gruppe, $h=1,\dots,H$\\
+$P_j$ ist der Effekt des $j$-ten Produkts, $j=1,\dots,J$\\
+$(GP)_{hj}$ ist der Effekt der Interaktion zwischen der Gruppe $h$ und der Produkt $j$\\
+$S_{i(h)}$ ist der Effekt der Person $i$ aus der $h$-ten Gruppe, $i=1,\dots,N_h$, $\sum_h N_h=N$ \\
+$\epsilon_{hij}$ ist der Fehler für Person $i$ in der Gruppe $h$ beim Produkt $j$
+
+Es gibt $N=IJ$ Beobachtungen.
+
+$S_{i(h)} \backsim N(0,\sigma_S^2)$\\
+$\epsilon_{hij} \backsim N(0,\sigma_\epsilon^2)$
+
+$\sigma_\epsilon^2$ ist die Variabilität von Bewertung zu Bewertung innerhalb der gleichen Personen. $\sigma_S^2$ ist die Variabilität zwischen den Personen.
+
+Die Nebenbedingungen lauten $\sum_j P = \sum_h G = \sum_h (GP) = \sum_j (GP)=0$.
+
+\subsection*{a. Varianzstruktur}
+Für das Modell ist eine Varianzstruktur wie in (\ref{mlm_cs}) vorgegeben. Die Homogenitätsannahme fordert eine konstante Varianz über alle Beobachtungen die sich aus der Variabilität innerhalb der Personen und zwischen den Personen zusammensetzt und eine konstante Kovarianz zwischen den Produkten die der Variabilität zwischen den Personen entspricht. Die Überprüfung erfolgt auf den Originaldaten, indem die Kovarianzen zwischen den Produkten ausgerechnet werden. Die Darstellung kann wie in Kapitel \ref{Kapitel_graph} erfolgen.
+
+\begin{equation}
+\label{mlm_cs}
+\begin{split} 
+V \langle y_{ij} \rangle & = \sigma_\epsilon^2+ \sigma_S^2 \quad \forall \quad j,\\
+Cov \langle y_{ij},y_{ij'} \rangle & = \sigma_S^2 \quad \forall \quad j \textrm{ und } j' \quad \textrm{ } (j \neq j')\\
+\end{split}
+\end{equation}
+
+\begin{equation}
+\label{mlm_icc}
+Corr \langle y_{ij},y_{ij'} \rangle & = \frac{\sigma_S^2}{\sigma_\epsilon^2+\sigma_S^2}
+\end{equation}
+
+Ein Beispiel für ein Design, bei denen eventuell Vorsicht geboten ist: Es werden 6 Produkte getestet. Sie teilen sich in zwei Gruppen auf, die innerhalb der Gruppe sehr homogen in den Produkteeigenschaften sind, sich untereinander aber stark unterscheiden. Wenn die Personen die Produkte innerhalb der Produktegruppen ähnlich bewerten, dann gibt es beispielsweise eine nicht-konstante Kovarianzstruktur. 
+
+Die Homogenitätsannahme kann auch durch statistische Tests überprüft werden. Leider sind die Tests sehr sensitiv und verlangen gewisse Rahmenbedingungen. Beide Tests sind in Hedeker und Gibbons (2006) \cite{hedeker} erklärt.
+
+Wird die Homogenitätsannahme abgelehnt, kann auf multivariate Repeated Measures (MANOVA) zurückgegriffen werden. Als Alternative bietet sich eine separierte Analyse von Repeated Measures ANOVA an. 
+
+Formel (\ref{mlm_un}) zeigt, dass die Bewertungen zwischen einzelnen Personen unabhängig voneinander sind.
+
+\begin{equation}
+\label{mlm_un}
+Cov \langle y_{ij},y_{i'j} \rangle =0 \quad \forall \quad i \textrm{ and } i' \quad (i \neq i')\\
+\end{equation}
+
+\subsection*{b. Fehlende Werte}
+Für ein Repeated Measures ANOVA gilt eine Balancierung im Sinn der Produkte - alle Personen müssen alle Produkte bewerten. Ist das nicht der Fall, werden die Personen aus dem Datensatz entfernt, weil bei blosser Streichung der fehlenden Beobachtungen der Datensatz im Sinn der Produkte unbalanciert wäre. 
+
+\subsection*{c. Balanciertheit}
+Im Sinn der Anzahl Produkte muss der Datensatz balanciert sein. Allerdings kann in den Gruppen die Anzahl Personen $N_h$ variieren. 
+
+\subsection*{d. ANOVA}
+Die ANOVA-Tabelle gilt für den Fall, dass alle Personen alle Produkte bewertet haben. Die Gruppengrösse darf variieren.
+
+\begin{tabular}{|l|lp{4cm}|l|l|l|} 
+\hline 
+Faktor & df & SS & MS & E(MS) & Tests\\
+\hline 
+\vspace*{0.25cm}
+G  & $(H-1)$ & $SS_G = J\sum_h N_h (y_{h..}-y_{...})^2$ & $\frac{SS_G}{H-1}$ & $\sigma_\epsilon^2 + n\sigma_P^2+ D_{G}$ & (\ref{mlm_F4})\\
+\vspace*{0.25cm}
+P  & $(J-1)$ & $SS_P = N\sum_j  (y_{..j}-y_{...})^2$ & $\frac{SS_P}{J-1}$ & $\sigma_\epsilon^2 + D_{P}$ & (\ref{mlm_F3})\\
+\vspace*{0.25cm}
+GP & $(H-1)(J-1)$ & $SS_{GP} = \sum_h \sum_j N_h (y_{h.j} -y_{h..} - y_{..j}+y_{...})^2$ & $\frac{SS_{(GP)}}{(H-1)(J-1)}$ &$\sigma_\epsilon^2 + D_{GP}$ & (\ref{mlm_F2})\\
+\vspace*{0.25cm}
+S(G) & $(N-H)$ & $SS_{S(G)} = J\sum_h \sum_i (y_{hi.}-y_{h..})^2$ & $\frac{SS_{S(G)}}{N-H}$ & $\sigma_\epsilon^2 + J\sigma_P^2$& (\ref{mlm_F5})\\
+\vspace*{0.25cm}
+R & $(N-H)(J-1)$ & $SS_{R} = \sum_h \sum_i \sum_j (y_{hij}-y_{h.j}-y_{hi.}+y_{h..})^2$ & $\frac{SS_{R}}{(N-H)(J-1)}$ & $\sigma_\epsilon^2$& \\
+Total & $NJ-1$ & $SS_{Total} = \sum_h \sum_i \sum_j (y_{hij}-y_{...})^2$ & & & \\
+\hline 
+\end{tabular} 
+
+$D_G$, $D_P$, $D_{GP}$ sind die summierten Differenzen über die Gruppen, die Produkte und die Interaktion Gruppe und Produkt.
+
+\subsubsection*{Tests für Gruppe $G$ und Produkt $P$}
+Die F-Tests der \emph{between-subject} Faktoren werden mit $MS_{S(G)}$ gebildet, jene der \emph{within-subject} Faktoren mit $MS_R$. Als \emph{within-subject} Faktor gilt auch die Wechselwirkung zwischen dem Produkt und der Gruppe. Falls mehrere Gruppierungen vorhanden sind (z.B. Alter und Geschlecht) werden diese mit $MS_{S(G)}$ getestet.
+
+Die Interaktion zwischen Gruppe und dem Produkt wird wie in Formel (\ref{mlm_F2}) getestet. Falls $H_{GP}$ verworfen wird, wird angenommen, das der Gruppeneffekt pro Produkte unterschiedlich ist.
+\begin{equation}
+\label{mlm_F2}
+H_{GP}: D_{GP} = 0, \qquad
+F_{GP} = \frac{MS_{GP}}{MS_R} \stackrel{\text{unter }H_{GP}}{\backsim} F_{(H-1)(J-1), (N-H)(J-1)}
+\end{equation}
+
+Falls $H_{GP}$ nicht verworfen wird, können $H_G$ und $H_P$ getestet werden.
+\begin{equation}
+\label{mlm_F3}
+H_P: P_1 = \ldots = P_n= 0, \qquad
+F_{P} = \frac{MS_{P}}{MS_R} \stackrel{\text{unter }H_{P}}{\backsim} F_{(J-1), (N-H)(J-1)}
+\end{equation}
+
+\begin{equation}
+\label{mlm_F4}
+H_{G}: G_1 = \ldots = G_s= 0, \qquad
+F_{G} = \frac{MS_{G}}{MS_{S(G)}} \stackrel{\text{unter }H_G}{\backsim} F_{(H-1), (N-H)}
+\end{equation}
+
+\subsubsection*{Tests für Personeneffekt $S(G)$}
+Der Personeneffekt wird wie in Formel (\ref{mlm_F5}) getestet.
+\begin{equation}
+\label{mlm_F5}
+H_{S(G)}: \sigma_\epsilon^2 = 0, \qquad
+F_{S(G)} = \frac{MS_{S(G)}}{MS_R} \stackrel{\text{unter }H_{S(G)}}{\backsim} F_{(N-H), (N-H)(J-1)}
+\end{equation}
+
+Zusätzlich oder alternativ zum Testen kann die \emph{Intraclass Correlation} wie in Formel (\ref{mlm_F6}) berechnet werden - die Variabilität zwischen den Personen kann auch als einen Anteil an der gesamten Rest-Variabilität der Beobachtungen angesehen werden (Variabilität zwischen den Personen und Variabilität innerhalb der Personen). Die \emph{Intraclass Correlation} nimmt Werte zwischen 0 und 1 an. Ist die \emph{Intraclass Correlation} nahe bei 0, kann angenommen werden, dass die Bewertungen zwischen den Personen nicht stark variiieren, die Korrelation zwischen den Produkten klein und kein Personeneffekt vorhanden ist. Liegt die \emph{Intraclass Correlation} nahe bei 1 variieren die Bewertungen zwischen den Personen stark und die Wertungen innerhalb einer Person sind hoch korreliert.
+\begin{equation}
+\label{mlm_F6}
+\widehat{ICC} = \frac{\hat{\sigma}_S^2}{\hat{\sigma}_\epsilon^2+\hat{\sigma}_S^2}
+\end{equation}
+
+\subsection*{e. Schätzungen und Vertrauensintervalle}
+Für die Schätzung des Modells werden nur die festen Effekte berücksichtigt. Die Schätzungen entsprechen der Formel (\ref{MLM_estim}), die Varianz der Schätzung wird durch die Kovarianzmatrix der Koeffizienten wie in Formel (\ref{MLM_betaestim}) und (\ref{MLM_estimvar}) berechnet\footnote{$\beta_k$ enthält nur die Parameterschätzer aus $y_{hij}$}. Gemeinsam bilden die Schätzung und die Varianz das Vertrauensintervall in Formel (\ref{MLM_vi}), wobei $n$ die Anzahl Beobachtungen sind und $p$ die Anzahl geschätzter fester Effekte (inklusive Gesamtmittel). 
+
+%, in dem 95 \% der Werte zu erwarten wären, wenn das Experiment nochmals durchgeführt würde.
+
+\begin{equation}
+\label{MLM_estim}
+\widehat{y}_{hij}=\hat{\mu}+\hat{G}_h+\hat{P}_j+(\widehat{GP})_{hj}
+\end{equation}
+
+\begin{equation}
+\label{MLM_betaestim}
+\beta_{w} = [\hat{\mu}, \hat{G}_{h}, \hat{P}_{j}, (\widehat{GP})_{ij}]\\
+\end{equation}
+
+\begin{equation}
+\label{MLM_estimvar}
+\widehat{Var \langle y_{hij} \rangle} = {\sum_{w} \sum_{w'} Cov \langle \beta_{w}},  \beta_{w'}\rangle} \qquad  \forall \quad w
+\end{equation}
+
+\begin{equation}
+\label{MLM_vi}
+\widehat{y}_{hij} \pm q^t_{1-\alpha/2, n-p} \sqrt{\widehat{Var \langle y_{hij} \rangle} }}}
+\end{equation}
+
+\subsection*{f. Residuenanalyse}
+Bei Mixed Models gibt es durch die zwei Fehlerterme zwei Sorten von Residuen. 
+\begin{itemize}
+	\item Residuum I = Beobachtung - feste Effekte - zufälliger Effekt
+	\item Residuum II = Beobachtung - feste Effekte
+\end{itemize}
+
+Mit dem Tukey-Anscombe-Plot kann die konstante Varianz und der Erwartungswert gleich 0 des Fehlerterms anhand der Residuen überprüft werden.
+
+% =====
+% Anwendung LS
+\section{Anwendung Lindt \& Sprüngli}
+Das Repeated Measures Modell für die Lindt \& Sprüngli Daten ist in der Gleichung (\ref{mlm_F1_bsp}) aufgeführt. Der Term $S_{i(kh)}$ bezeichnet den Personeneffekt. 
+
+\begin{equation}
+\label{mlm_F1_bsp}
+y_{hijk}=\mu+G_h+A_k+(AG)_{kh}+P_j+(PG)_{jh}+(PA)_{jk}+S_{i(kh)}+\epsilon_{hijk}
+\end{equation}
+
+$y_{hijk}$ ist die Bewertung des 'Taste' bzw. 'Texture' des Produkt $j$ von der Person $i$ mit der Altersgruppe $k$, dem Geschlecht $h$\\
+$\mu$ ist das Mittel über die Beobachtungen mit Alter $k=1$, Geschlecht $h=1$, Produkt $j=1$\\
+$G_h$ ist der Effekt des $h$-ten Geschlecht, $h=1,2$\\
+$A_k$ ist der Effekt der $k$-ten Altersgruppe, $k=1,2,3$\\
+$P_j$ ist der Effekt des $j$-ten Produkts, $j=1,...,8$\\
+$(PA)_{jk}$ ist die Wechselwirkung zwischen dem $j$-ten Produkt und der $k$-ten Altersgruppe\\
+$(PG)_{jh}$ ist die Wechselwirkung zwischen dem $j$-ten Produkt und dem $h$-ten Geschlecht\\
+$(AG)_{kh}$ ist die Wechselwirkung zwischen der $k$-ten Altersgruppe und dem $h$-ten Geschlecht\\
+$S_{i(kh)}$ ist der Effekt der Person $i$, die Personen sind in den Altersgruppen $k$ und dem Geschlecht $h$ geschachtelt, $i=1,\dots,N_{kh}$, $\sum_k \sum_h N_{kh}=N$\\
+$\epsilon_{hijk}$ ist der Fehler für Person $i$ mit dem Geschlecht $h$ in der Altersgruppe $k$ beim Produkt $j$.
+
+$S_{i(h,k)} \backsim N(0,\sigma_S^2)$\\
+$\epsilon_{hij} \backsim N(0,\sigma_\epsilon^2)$\\
+
+Die Nebenbedingungen der Koeffizienten lauten $G_1=A_1=P_1=(AG)_{11}=(AG)_{21}=(AG)_{31} =(AG)_{12}=(PA)_{11}=(PA)_{12}=(PA)_{13}=(PA)_{21}=(PA)_{31}=(PA)_{41}=(PA)_{51}=(PA)_{61}=(PA)_{71}=(PA)_{81}=(PG)_{11}=(PG)_{12}=(PG)_{21}=(PG)_{31}=(PG)_{41}=(PG)_{51}=(PG)_{61}=(PG)_{71}=(PG)_{81}=0$
+
+
+\subsection{Ergebnisse}
+Als Beispiel für ein Ergebnis einer Repeated Measures ANOVA wird das Modell mit der Zielvariable Taste vom Datensatz A gezeigt. Die restlichen Resultate sind im Anhang \ref{anhang_mlm}.
+
+%% ----
+\subsubsection*{taste $\backsim$ product + age + gender + Wechselwirkungen + Error(subject), data=datA}
+\begin{alltt}
+mod <- aov(taste ~ (product + age + gender)^2 + Error(subject), data = datA)
+	
+#Error: subject
+#            Df Sum Sq Mean Sq F value  Pr(>F)  
+#age          2   51.9    26.0  3.1313 0.04449 *
+#gender       1    6.8     6.8  0.8231 0.36470  
+#age:gender   2    3.8     1.9  0.2295 0.79498  
+#Residuals  513 4251.9     8.3                  
+#---
+#Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1 
+#
+#Error: Within
+#                 Df Sum Sq Mean Sq F value Pr(>F)    
+#product           3  567.3   189.1 63.4361 <2e-16 ***
+#product:age       6   16.5     2.7  0.9207 0.4788    
+#product:gender    3    3.0     1.0  0.3340 0.8008    
+#Residuals      1545 4605.3     3.0 
+
+\end{alltt}
+% Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=10cm]{Images/lmer_datA_Taste_latex.pdf}
+\caption{Datensatz A: Schätzungen der Bewertungen des Geschmacks durch ein Repeated Measures Modell für das Alter, Geschlecht und Produkt.}
+%\label{grafik:lm_texture_datB}
+\end{figure}
+
+
+\section{Bemerkung}
+Repeated Measures ANOVA bieten bei den Daten von Lindt \& Sprüngli eine korrekte Analyse. Falls eine Unterteilung des Personeneffekts auf verschiedene Altersgruppen oder das Geschlecht nötig ist oder unbalancierte Daten vorliegen (Datensatz B) können erweiterte Mixed Models angewendet werden.
+
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+% Linear Mixed Effects Model - unbalanciertes Design
+
+\chapter{Linear Mixed Effects Regression Model}
+\label{Kapitel_MM}
+
+% =====
+% Modelltheorie
+Die Erweiterung des Repeated Measures ANOVA - sogenannten traditionellen Mixed Models - mit einem zusätzlichen zufälligen Slope-Effekt führt zu einem \emph{Linear Mixed Effects Regression Model}. Im Vergleich zum univariaten Mixed Model sind mehrere zufällige Terme erlaubt. 
+
+Im Zusammenhang mit Repeated Measures Daten wird die Implementation von Mixed Models dann benötigt, wenn ein Datensatz fehlende Werte beinhaltet. Ein Mixed Model kann aber auch angebracht sein, wenn die Unterteilung des Personeneffkts auf eine Gruppierung nötig ist, weil sich die Variabilität der Bewertungen der Personen innerhalb der Gruppenlevels stark unterscheiden.
+
+Einen Überblick über Mixed Models bietet sowohl Kapitel 13 aus \emph{Design and Analysis of Experiments} von Montgomery (2005) \cite{montgomery}, als auch Kapitel 4 aus \emph{Longitudinal Data Analysis} von Hedeker und Gibbons (2006) \cite{hedeker}, aus dem die nachführenden Ausführungen teilweise entnommen sind. \emph{Mixed-effects models in S and S-Plus} von Pinheiro und Bates (2000) \cite{bates} ist ein Buch über die Anwendung von Mixed Models in \texttt{R}.
+
+% =====
+% Modell
+\section{Theorie}
+Im Repeated Measures Modell der Gleichung (\ref{mlm_F1}) gibt es den zufälligen Term $S_{i(h)}$, dessen geschätzte Varianz $\hat{\sigma}_S^2$ die Variabilität zwischen den Personen beschreibt. In derselben Formel gibt es auch einen Faktor $G$, der die Personen in Gruppen einteilt. $S$ ist in $G$ geschachtelt. Wenn die Variabilität der Bewertungen der Personen innerhalb einer Gruppierung $G_h$ interessiert, kann das im Model durch den zufälligen Term $S_{i(h)}^h$ ausgedrückt werden. Das entspricht quasi einer Wechselwirkung des zufälligen Terms $S_{i(h)}$ mit dem Term $G_h$. $S_{i(h)}^h$ ist ebenfalls normalverteilt mit Erwartungswert 0 und der Varianz $\sigma_{S^h}^2$. Die Variabilität der Bewertungen der Personen im ersten Level der Gruppe $G_1$ entspricht dem Term $\sigma_{S}^2$. $S_{i(h)}^h$ ist ein sogenannter Slope-, $S_{i(h)}$ ein Intercept-Fehlerterm. Gleichung (\ref{mm_F1}) zeigt das ergänzte Modell.
+
+\begin{equation}
+\label{mm_F1}
+y_{hij}=\mu+G_h+P_j+(GP)_{hj}+S_{i(h)}+S^{h}_{i(h)}+\epsilon_{hij}
+\end{equation}
+
+$y_{hij}$ ist die Beobachtung der Person $i$ in der Gruppe $h$ und dem Produkt $j$\\
+$\mu$ ist das Gesamtmittel\\
+$G_h$ ist der Effekt der $h$-ten Gruppe, $h=1,\dots,H$\\
+$P_j$ ist der Effekt des $j$-ten Produkts, $j=1,\dots,J$\\
+$(GP)_{hj}$ ist der Effekt der Interaktion zwischen der Gruppe $h$ und der Produkt $j$\\
+$S_{i(h)}$ ist der Effekt der Person $i$, $i$ ist in $h$ geschachtelt, $i=1,\dots,N_h, \sum_h N_h=N$ \\
+$S^{h}_{i(h)}$ ist der Effekt der Person $i$ in der Gruppe $h$, $i$ ist in $h$ geschachtelt\\
+$\epsilon_{hij}$ ist der Fehler für Person $i$ in der Gruppe $h$ beim Produkt $j$.
+
+Die Nebenbedingungen lauten $\sum_j P = \sum_h G = \sum_j (GP)= \sum_h (GP) =0$.
+
+%$S_{i(h)} \backsim N(0,\sigma_S^2)$\\ % intercept
+%$S^{h}_{i(h)} \backsim N(0,\sigma_{S^h}^2) \quad \forall \quad h\\ % Gruppe h
+Der Term $S_{i(h)}$ wird in $S^h_{i(h)}$ integriert, weil $\sigma_{S_1}^2=$\sigma_{S}^2$.
+
+$S^{h}_{i(h)} \backsim \textbf{N}(0,\Sigma_S)\\% Gruppe h
+$\epsilon_{hij} \backsim N(0,\sigma_\epsilon^2)$
+
+$\sigma_\epsilon^2$ ist die Variabilität von Bewertung zu Bewertung innerhalb der gleichen Personen. $\sigma_{S_h}^2$ ist die Variabilität der Personen in der Gruppe $h$. $\Sigma_S$ ist die Kovarianzmatrix der multivariaten Normalverteilung der Terme $S_{i(h)}$ und $S^{h}_{i(h)}$ mit Erwartungswert 0. 
+
+\subsection*{a. Varianz-Kovarianz-Struktur}
+Für jedes Level $h$ der Gruppe $G_h$ gibt es ein anderes $\sigma_{S^h}^2$, ausser für \sigma_{S^1}^2$, welches dem Gesamtmittel $\sigma_{S}^2$ entspricht. Die geschätzte Varianz gibt der Terme gibt darüber Aufschluss, ob ein solcher Term überhaupt notwendig ist, also ob überhaupt ein Personeneffekt in diesem Gruppenlevel überhaupt exisitert. Die Korrelation gibt an, ob zwischen den zwei Termen eine positive oder negative Korrelation herrscht.\\
+
+\begin{displaymath} 
+\mathbf{\Sigma_S} = 
+\left( \begin{array}{cccc} 
+\sigma_S^2 &\sigma_S\sigma_{S^{2}} & \dots & \sigma_S\sigma_{S^{h}}\\ 
+\sigma_{S^{2}}\sigma_S &\sigma_{S^{2}}^2&  \dots & \sigma_{S^{2}}\sigma_{S^{h}}\\ 
+\vdots & \vdots & \ddots & \vdots \\
+\sigma_{S^{h}}\sigma_S & \sigma_{S^{h}}\sigma_{S^{2}}& \dots & \sigma_{S^{h}}^2\\ 
+\end{array} \right) 
+\end{displaymath} 
+
+Die geschätzte Korrelationsmatrix der zufälligen Terme wird beim Modelloutput der Programme ausgegeben und sollte beachtet werden um die Form der Varianz-Kovarianzstruktur zu überprüfen. Die Korrelation zwischen $\sigma_S^2$ und $\sigma_{S_2}^2$ beträgt $(\sigma_S\sigma_{S_2})/(\sigma_S^2\sigma_{S_2}^2)$. Für die Korrelationsmatrix werden die Seitenelemente also durch die entsprechenden Diagonalelemente geteilt. 
+
+Die Varianz-Kovarianz-Struktur wird nicht mehr vorab wie bei der Repeated Measures ANOVA, sondern im Nachhinein überprüft.
+
+Hier geht man von korrelierten zufälligen Faktoren aus. Falls die Faktoren nicht miteinander korrelieren, können sie auch als unkorreliert modelliert werden.
+
+\subsection*{a. ANOVA}
+Die Tests für \emph{between-subject} und \emph{within-subject} Faktoren entsprechen der ANOVA-Tabelle in Kapitel \ref{Kapitel_MLM}.
+
+\subsection*{b. Fehlende Werte}
+Beobachtungen mit fehlenden Werten werden im Modell nicht berücksichtigt. 
+
+%%%
+\subsection*{c. Schätzungen und Vertrauensintervalle}
+Die Schätzungen entsprechen der Formel (\ref{MM_estim}), die Varianz der Schätzung wird durch die Kovarianzmatrix der Koeffizienten wie in Formel (\ref{MM_betaestim}) und (\ref{MM_estimvar}) berechnet\footnote{$\beta_w$ enthält nur die Parameterschätzer aus $\widehat{y}_{hij}$}.  Gemeinsam bilden die Schätzung und die Varianz das Vertrauensintervall aus Formel (\ref{MM_vi}), wobei $n$ die Anzahl Beobachtungen sind und $p$ die Anzahl geschätzter fester Effekte (inklusive Gesamtmittel).
+
+\begin{equation}
+\label{MM_estim}
+\widehat{y}_{hij}= \hat{\mu} + \hat{G}_{h} + \hat{P}_{j} + (\widehat{GP})_{hj}
+\end{equation}
+
+\begin{equation}
+\label{MM_betaestim}
+\beta_w = [\hat{\mu}, \hat{G}_{h}, \hat{P}_{j}, (\widehat{GP})_{hj}]\\
+\end{equation}
+
+\begin{equation}
+\label{MM_estimvar}
+\widehat{Var \langle y_{ijh} \rangle} = {\sum_w \sum_{w'} Cov \langle \beta_w},  \beta_{w'}\rangle} \qquad  \forall \quad w
+\end{equation}
+
+\begin{equation}
+\label{MM_vi}
+\widehat{y}_{ijh} \pm q^t_{1-\alpha/2, n-p} \sqrt{\widehat{Var \langle y_{ijh} \rangle}}}
+\end{equation}
+
+Die Verteilung der Parameterschätzer und damit das Vertrauensintervall kann auch mit Bootstrap simuliert werden. Diese Methode wird in Kapitel \ref{bootstrap} detaillierter besprochen.
+
+%Zusätzlich oder alternativ zum Testen kann die \emph{Intraclass Correlation} berechnet werden - der Personeneffekt kann auch als einen Anteil an der gesamten Fehlervarianz angesehen werden. $\widehat{ICC}$ liegt zwischen 0 und 1. Ist die \emph{Intraclass Correlation} nahe bei 0, kann angenommen werden, dass die Mittelwerte zwischen den Personen nicht stark streuen, die Korrelation zwischen den Produkten klein und somit kein Personeneffekt vorhanden ist. Liegt der $\widehat{ICC}$  nahe bei 1 sind die Wertungen innerhalb einer Person stark korreliert und homogen.
+%\begin{equation}
+%\label{mlm_F6}
+%\widehat{ICC} = \frac{\hat{\sigma}_P^2}{\hat{\sigma}_\epsilon^2+\hat{\sigma}_P^2}
+%\end{equation}
+
+\subsection*{d. Residuenanalyse}
+Bei Mixed Models gibt es durch die zwei Fehlerterme zwei Sorten von Residuen. 
+\begin{itemize}
+	\item Residuum I = Beobachtung - feste Effekte - zufälliger Effekt
+	\item Residuum II = Beobachtung - feste Effekte
+\end{itemize}
+
+Beide Typen können für die Residuenanalyse verwendet werden. Mit dem Tukey-Anscombe-Plot kann die konstante Varianz und der Erwartungswert gleich 0 des Fehlerterms anhand der Residuen überprüft werden.
+
+
+%%%
+\subsection*{e. Schätzmethoden}
+REML und ML sind verschiedene Schätzmethoden. REML bedeutet \emph{Restricted Estimated Maximum Likelihood}\footnote{Siehe auch Seite 75 in \emph{Mixed-effects models in S and S-Plus} von Pinheiro und Bates (2000) \cite{bates}.} und ML \emph{Maximum Likelihood}. Als Schätzmethode wird REML bevorzugt, weil ML-Schätzungen einen Bias haben. Bei balancieren Daten sind die REML- und ML-Schätzungen identisch.
+
+\section{P-Werte und Bootstrap}
+\label{bootstrap}
+Im Fall eines balancierten Designs (alle Personen bewerten alle Produkte) sind die P-Werte der F-Tests in der ANOVA-Tabelle und die P-Werte der t-Tests der Parameterschätzungen korrekt. Im unbalancierten Design ist das nicht der Fall. Dass die F- und t-Verteilungen nur noch approximativ sind, hängt mit der Veränderung in der Schätzung der festen und zufälligen Parameter zusammen. Der Grad der Approximation der F- und t-Verteilungen hängt mit der Datenlage (Unbalanciertheit, fehlenden Werten, Anzahl Beobachtungen) zusammen. Bei der Funktion \texttt{lmer()} in der Software \texttt{R} werden keine P-Werte angegeben. Um dennoch ein Vertrauensintervall zu erhalten, kann mit der Bootstrap-Methode nachgeholfen werden, mit der die Verteilung von 'verteilungslosen' Schätzern approximativ bestimmt werden können.
+
+Seite 87 bis 90 und 195 bis 201 in Harrell (2001) \cite{harrell} erklären die Bootstrap-Methode.  Bootstrap ist eine nicht-parametrische Methode um die Verteilung einer Zufallsvariable $X$ oder deren Funktion $g(X)$ zu bestimmen\footnote{Bootrap engl. Steigbügel}.
+
+Von einer Zufallsvariable $X$ gibt es Realisationen, von denen aber die Verteilung unbekannt ist. Bei Bootstrap werden k Stichproben $\Lambda_k$ mit folgendem Schema generiert: n Werte aus den Realisationen von $X$ mit Zurücklegen ziehen (es gibt Elemente, die nicht in der Stichprobe erscheinen und welche, die mehrfach vorhanden sind). Für jede Stichprobe $\Lambda_k$ kann die zu interessierende Statistik $g(\Lambda_i)$ berechnet werden (beispielsweise der Mittelwert). So hat man am Schluss die Verteilung von $g(X)$.
+
+In unserem Anwendungsfall der Vertrauensintervalle verhält sich der oben beschriebene Algorithmus etwas anders. Wir haben einen Datensatz mit $N$ Zeilen. Daraus werden $5000$ Stichproben der Grösse $N$ mit Zurücklegen gezogen. Mit jeder Stichprobe $\Lambda_i$ wird ein Mixed Model mit $k$ Parametern gerechnet und daraus jeweils die Parameter in einer Matrix gespeichert. Aus der Matrix der Grösse $k\times i$ können dann die Mittelwerte und die gewünschten Quantile pro Parameter $k$ berechnet werden. Schematisch kann das gut mit einem for-loop dargestellt werden. (Bei der For-Schlaufe muss die Grösse des Modells bedacht werden. Ein Intercept-Term Mixed Model rechnet sehr schnell, mit Slope-Termen kann die Berechnung sehr lange dauern.)
+
+\begin{verbatim}
+# ------------------------
+n = 5000
+
+for (i von 1 bis n) {
+
+	(1a) Daten_i = Stichprobe aus den Daten ziehen mit Zurücklegen
+	(1b) bcoef_i= Modell mit den Daten_i schätzen und die Koeffizienten 
+	in einer Matrix speichern
+	
+}
+
+(2) Mittelwerte, alpha/2-quantil und 1-alpha/2-quantil 
+aus bcoef_i für jeden Parameter berechnen.
+
+(3) Aus (2) kann das Vertrauensintervall berechnet werden.
+# ------------------------
+\end{verbatim}
+
+Nun gibt es drei Möglichkeiten: 
+
+\begin{itemize}
+	\item Die Mittelwerte und die Standardabweichungen unterscheiden sich nicht stark von den Schätzungen des Koeffizienten des Modells. $\rightarrow$ Vertrauensintervalle, Tests aus den Schätzungen im Modell.
+	\item Die Mittelwerte des Bootstrapping weichen nicht stark von den geschätzten Koeffizienten des Modells ab, die Standardabweichungen jedoch schon. $\rightarrow$ Mittelwerte aus dem Modell, die Quantile aus der Bootstrap-Methode. Dieser Punkt gilt bedingt im Fall der Lindt \& Sprüngli Daten. Bei den \emph{between-subject} Faktoren (Alter, Geschlecht) (die oft gar nicht in das Modell einbezogen werden) weichen die Boostrap-Vertrauensintervalle von den geschätzten Vertrauensintervallen ab. Bei den \emph{within-subject} Faktoren (Produkte) stimmen die Vertrauensintervalle überein. 
+	\item Die Mittelwerte und Standardabweichungen des Bootstrapping weichen von den geschätzten Koeffizienten des Modells ab. $\rightarrow$ Mittelwerte für Vertrauensintervalle, Tests aus der Bootstrap-Methode
+\end{itemize}
+
+%Seien $Z_1, ..., Z_n$ die vorhandenen Realisationen.
+%\begin{itemize}
+%	\item Aus den vorhanden Realisationen das Bootstrap sample $Z^*_1, ..., Z^*_n$ mit Ziehen mit Zurücklegen generieren.
+%	\item Mixed Modell rechnen. $\hat{\Gamma}_n^* = g(Z^*_1, ..., Z^*_n)$
+%	\item B mal wiederholen. $\hat{\Gamma}_n^{*,1}, ..., \hat{\Gamma}_n^{*,B}$
+%	\item \alpha-Quantil berechnen.\\
+%	einfach: $[q^*_{\alpha/2}, q^*_{1-\alpha/2}]$\\
+%	richtig: $[2\hat{\Gamma}_n - q^*_{1-\alpha/2}, 2\hat{\Gamma}_n - q^*_{\alpha/2}]$\\
+%	wobei: $q^*_{\alpha}$ = $\alpha$-Boostrap-Quantil von $\hat{\Gamma}_n^*$\\
+%	Folgerung: falls Verteilung nicht-symmetrisch, einfach $\ne$ richtig. 
+%\end{itemize}
+
+
+
+
+%% Bild
+%\begin{center}
+%\begin{figure} [H]
+%\includegraphics[width=12cm]{Images/lmer_boostrap_VI_(Intercept).pdf}
+%\caption{Boostrap Modell, Intercept. Links Taste, Rechts Texture, rot Bootstrap, blau ist normal}
+%\label{bild:bootstrap_Intercept}
+%\end{figure}
+%\end{center}
+
+%% ----
+%% Bild
+%\begin{center}
+%\begin{figure} [H]
+%\includegraphics[width=12cm]{Images/lmer_boostrap_VI_age_new55-.pdf}
+%\caption{Boostrap Modell, age 55-. Links Taste, Rechts Texture, rot Bootstrap, blau ist normal}
+%\label{bild:bootstrap_age_new55-}
+%\end{figure}
+%\end{center}
+
+%% ----
+%% Bild
+%\begin{center}
+%\begin{figure} [H]
+%\includegraphics[width=12cm]{Images/lmer_boostrap_VI_prdLindtCH.pdf}
+%\caption{Boostrap Modell, prd Lindt CH. Links Taste, Rechts Texture, rot Bootstrap, blau ist normal}
+%\label{bild:bootstrap_prdLindtCH}
+%\end{figure}
+%\end{center}
+
+
+\newpage
+% =====
+% Anwedung von L&S
+\section{Anwendung Lindt \& Sprüngli}
+Gleichung (\ref{mm_F1_bsp}) zeigt das Mixed Model für die Lindt \& Sprüngli Daten mit einem Slope-Term. 
+
+\begin{equation}
+\label{mm_F1_bsp}
+T_{hijk}=\mu+A_k+G_h+P_j+(AG)_{kh}+(PA)_{jk}+(PG)_{jh}+S_{i(hk)}+S^{k}_{i(hk)}+\epsilon_{hijk}
+\end{equation}
+
+$T_{hijk}$ ist die Bewertung des 'Taste' bzw. 'Texture' des Produkt $j$ von der Person $i$ mit der Altersgruppe $k$ und dem Geschlecht $h$\\
+$\mu$ ist das Mittel über die Beobachtungen mit Alter $k=1$, Geschlecht $h=1$ und Produkt $j=1$\\
+$G_h$ ist der Effekt des $h$-ten Geschlecht, $h=1,2$\\
+$A_k$ ist der Effekt der $k$-ten Altersgruppe, $k=1,2,3$\\
+$P_j$ ist der Effekt des $j$-ten Produkts, $j=1,...,8$\\
+$(PA)_{jk}$ ist die Wechselwirkung zwischen dem $j$-ten Produkt und der $k$-ten Altersgruppe\\
+$(PG)_{jh}$ ist die Wechselwirkung zwischen dem $j$-ten Produkt und dem $h$-ten Geschlecht\\
+$(AG)_{kh}$ ist die Wechselwirkung zwischen der $k$-ten Altersgruppe und dem $h$-ten Geschlecht\\
+$S_{i(kh)}$ ist der Effekt der Person $i$, die Personen sind in den Altersgruppen $k$ und dem Geschlecht $h$ geschachtelt, $i=1,\dots,N_{kh}$, $\sum_k \sum_h N_{kh}=N$\\
+$S^{k}_{i(kh)}$ ist der Effekt der Person $i$ in der $k$-ten Altersgruppe, die Personen sind in den Altersgruppen $k$ und dem Geschlecht $h$ geschachtelt\\
+$\epsilon_{hijk}$ ist der Fehler für Person $i$ mit dem Geschlecht $h$ in der Altersgruppe $k$ beim Produkt $j$
+
+Der Term $S_{i(kh)}$ wird in $S^k_{i(kh)}$ integriert, weil $\sigma_{S_1}^2=$\sigma_{S}^2$.
+
+$S^{k}_{i(kh)} \backsim \textbf{N}(0,\Sigma_S)\\% Gruppe h
+$\epsilon_{hijk} \backsim N(0,\sigma_\epsilon^2)$
+
+$\sigma_\epsilon^2$ ist die Variabilität von Bewertung zu Bewertung innerhalb der gleichen Personen. $\sigma_{S_k}^2$ ist die Variabilität der Personen in der Altersgruppe $k$. $\Sigma_S$ ist die Kovarianzmatrix der multivariaten Normalverteilung der zufälligen Terme $S_{i(kh)}$ und $S^{k}_{i(kh)}$ mit Erwartungswert 0. 
+
+Die Nebenbedingungen der Koeffizienten lauten $G_1=A_1=P_1=(AG)_{11}=(AG)_{21}=(AG)_{31} =(AG)_{12}=(PA)_{11}=(PA)_{12}=(PA)_{13}=(PA)_{21}=(PA)_{31}=(PA)_{41}=(PA)_{51}=(PA)_{61}=(PA)_{71}=(PA)_{81}=(PG)_{11}=(PG)_{12}=(PG)_{21}=(PG)_{31}=(PG)_{41}=(PG)_{51}=(PG)_{61}=(PG)_{71}=(PG)_{81}=0$.
+
+\newpage
+\subsection{Ergebnisse}
+Die Vertrauensintervalle der Ergebnisse des Datensatz A und B werden jeweils mit der Boostrap-Methode gebildet. Die ANOVA-Tabelle entspricht dem gewöhnlichen Modelloutput und ist nicht durch Boostrapping korrigiert worden. Die restlichen Resultate sind im Anhang \ref{anhang_mm}.
+
+%% ----
+\subsubsection*{taste $\backsim$ product + age + gender + (1 + age | subject), data=datB}
+\begin{alltt}
+mod <- lmer(taste ~ (product + age + gender)^2 + (age | subject), data = datB)
+	
+# Linear mixed model fit by REML 
+# Formula: taste ~ (product + age + gender)^2 + (age | subject) 
+#    Data: dat 
+#   AIC  BIC logLik deviance REMLdev
+#  5072 5280  -2495     4974    4990
+# Random effects:
+#  Groups   Name         Variance Std.Dev. Corr          
+#  subject  (Intercept)  1.11490  1.05589                
+#               age35-54 0.98064  0.99027  -0.271        
+#               age55-   0.34574  0.58799  -0.611  0.165 
+#  Residual              3.46567  1.86163                
+# Number of obs: 1174, groups: NJ, 196
+# 
+# Fixed effects:
+# ...
+
+# Analysis of Variance Table
+#                 Df Sum Sq Mean Sq F value
+# product          7 466.39   66.63 19.2249
+# age              2  53.00   26.50  7.6461
+# gender           1  12.60   12.60  3.6366
+# product:age     14  44.26    3.16  0.9122
+# product:gender   7  42.67    6.10  1.7590
+# age:gender       2   9.22    4.61  1.3301
+
+\emph{# zusätzlich mit der Bootstrap-Methode Vertrauensintervalle 
+der Parameterschätzungen bilden}
+\end{alltt}
+% Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=10cm]{Images/lmerSlope_datB_Taste_latex.pdf}
+\caption{Datensatz B: Schätzungen der Bewertungen des Geschmacks durch ein Mixed Model für das Alter, Geschlecht und Produkt.}
+%\label{grafik:lm_texture_datB}
+\end{figure}
+
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+% Umsetztung bei Lindt und Sprüngli
+\chapter{Umsetzung bei Lindt \& Sprüngli}
+\label{Kapitel_Umsetzung}
+
+Die Analysen der Sensorikabteilung von Lindt \& Sprüngli dienen unter anderem als Entscheidungshilfe für das Management. Produkte die eine Wertung über 8 Punkte erreichen, werden als potentielles Verkaufsprodukt gewertet. Für eine solche Entscheidung ist neben der Punktschätzung auch das Vertrauensintervall von Bedeutung. 
+
+Von gewissen Effekten sind die Muster bereits bekannt. Jüngere Menschen, bzw. Frauen bewerten die Produkte tendenziell tiefer als ältere Menschen, bzw. Männer. Wenn das Alter oder das Geschlecht mit in das Modell einbezogen und in einer Grafik dargestellt werden, werden Muster dargestellt, die bereits bekannt und daher uninteressant sind (für das Managment). Daher wird für eine Darstellung oft nur das Produkt als erklärende Variable verwendet.
+
+\section{Praktisches Vorgehen}
+\begin{enumerate}
+	\item Homogenitätsannahme überprüfen
+	\item Vollständiges Modell (Haupteffekte/Wechselwirkungen) berechnen
+	\item Falls bei den Alters- und Geschlechtereffekten die gewöhnlichen Muster auftreten, können diese Faktoren aus dem Modell genommen werden.
+	\item Reduziertes Modell berechnen (Haupteffekte/Wechselwirkungen) 
+	\item Modellannahmen anhand der Residuenanalyse überprüfen
+	\item Grafik mit Schätzungen des reduzierten Modells erstellen.
+\end{enumerate}
+
+Neben den Faktoren Alter und Geschlecht kann auch die Kaufabsicht der Personen interessieren. Ein Beispiel hierzu wird in Kapitel \ref{Kapitel_Diskussion} gezeigt.
+
+Falls die Homogenitätsannahme abgelehnt werden muss, weil zwischen einzelnen Produkten eine hohe Kovarianz besteht, können die Produktegruppen einzeln ausgewertet werden.
+
+% =====
+% Beispiel Taste Datensatz B
+\section{Beispiel: Modell für Taste aus Datensatz B}
+Als Beispiel einer Analyse wird der Datensatz B verwendet. Es soll eine Grafik mit den Schätzungen der Zielvariable 'Taste' für die Sub-Gruppen Alter, Geschlecht und Sprachgebiet erstellt werden. Formel (\ref{beispiel_F1}) zeigt das Mixed Model mit einem Intercept-Fehlerterm dazu. 
+
+\begin{equation}
+\begin{split}
+T_{hijkl}=\mu+P_j+A_k+G_h+L_l+(PA)_{jk}+(PG)_{jh} +(PL)_{jl}+(AG)_{kh}& \\+(AL)_{kl}+(GL)_{hl}+S_{i(khl)}+\epsilon_{hijkl}
+\end{split}
+\label{beispiel_F1}
+\end{equation}
+
+$T_{hijkl}$ ist die Bewertung des 'Taste' des Produkt $j$ von der Person $i$ mit der Altersgruppe $k$, dem Geschlecht $h$, dem Sprachgebiet $l$\\
+$\mu$ ist das Mittel über die Beobachtungen mit Alter $k=1$, Geschlecht $h=1$, Produkt $j=1$ und Sprachgebiet $l=1$ \\
+$G_h$ ist der Effekt des $h$-ten Geschlecht, $h=1,2$\\
+$A_k$ ist der Effekt der $k$-ten Altersgruppe, $k=1,2,3$\\
+$P_j$ ist der Effekt des $j$-ten Produkts, $j=1,...,8$\\
+$L_l$ ist der Effekt des $l$-ten Sprachgebiets, $l=1,2$\\
+$(PA)_{jk}$ ist die Wechselwirkung zwischen dem $j$-ten Produkt und der $k$-ten Altersgruppe\\
+$(PG)_{jh}$ ist die Wechselwirkung zwischen dem $j$-ten Produkt und dem $h$-ten Geschlecht\\
+$(PL)_{jl}$ ist die Wechselwirkung zwischen dem $j$-ten Produkt und dem $k$-ten Sprachgebiet\\
+$(AG)_{kh}$ ist die Wechselwirkung zwischen der $k$-ten Altersgruppe und dem $h$-ten Geschlecht\\
+$(AL)_{kl}$ ist die Wechselwirkung zwischen der $k$-ten Altersgruppe und dem $l$-ten Sprachgebiet\\
+$(GL)_{hl}$ ist die Wechselwirkung zwischen dem $h$-ten Geschlecht und dem $l$-ten Sprachgebiet\\
+$S_{i(khl)}$ ist der Effekt der Person $i$, die Personen sind in den Altersgruppen $k$, dem Sprachgebiet $l$ und dem Geschlecht $h$ geschachtelt, $i=1,\dots,N_{khl}$, $\sum_k \sum_h \sum_l N_{khl}=N$\\
+$\epsilon_{hijkl}$ ist der Fehler für Person $i$ mit dem Geschlecht $h$, dem Sprachgebiet $l$ in der Altersgruppe $k$ beim Produkt $j$
+
+$S_{i(hkl)} \backsim i.i.d. N(0,\sigma_S^2)\\% Gruppe h
+$\epsilon_{hijkl} \backsim i.i.d. N(0,\sigma_\epsilon^2)$
+
+$\sigma_\epsilon^2$ ist die Variabilität von Bewertung zu Bewertung innerhalb der gleichen Personen. $\sigma_S^2$ ist die Variabilität zwischen den Personen.
+
+Die Nebenbedingungen der Koeffizienten lauten $G_1=A_1=P_1=(AG)_{11}=(AG)_{21}=(AG)_{31} =(AG)_{12}=(PA)_{11}=(PA)_{12}=(PA)_{13}=(PA)_{21}=(PA)_{31}=(PA)_{41}=(PA)_{51}=(PA)_{61}=(PA)_{71}=(PA)_{81}=(PG)_{11}=(PG)_{12}=(PG)_{21}=(PG)_{31}=(PG)_{41}=(PG)_{51}=(PG)_{61}=(PG)_{71}=(PG)_{81}=(PL)_{11}=(PL)_{12}=(PL)_{21}=(PL)_{31}=(PL)_{41}=(PL)_{51}=(PL)_{61}=(PL)_{71}=(PL)_{81}=0$
+
+
+\subsection*{a. Grafische Darstellung}
+Zuerst werden die Modellannahmen anhand der Originaldaten überprüft. In Abbildung \ref{grafik_beispiel_cov} ist die Kovarianzmatrix der Produkte und die Boxplots pro Produkt abgebildet. Die Homogenitätsannahme verlangt eine konstante Varianz und dieselbe Kovarianz zwischen allen Produkten. Die Kovarianz scheint zwar nicht konstant zu sein für alle Kombinationen, aber eine grobe Verletzung scheint nicht vorzuliegen - dasselbe bei der Varianz.
+
+\begin{figure}[H] 
+    \centering 
+        \subfloat{\includegraphics[width=7cm]{Images/beispiel_deskriptiv_datB_Taste_cov.pdf}}
+        \subfloat{\includegraphics[width=7cm]{Images/beipiel_deskriptiv_datB_Taste_boxplot.pdf}}
+        \caption{Kovarianzmatrix und die Boxplots der 8 Produkte für die Überprüfung der Homogenitätsannahme} 
+  \label{grafik_beispiel_cov}
+\end{figure}
+
+Abbildung \ref{grafik_beispiel_mosaic} zeigt mit Mosaikplots die Verhältnisse der Gruppengrössen auf. Auf den ersten Blick ist ersichtlich, dass das Design nicht balanciert ist (sonst wären alle Vierecke gleich gross). Von den Testpersonen sind etwas weniger wie 2/3 aus einem deutschsprachigen Gebiet der Schweiz. Die Altersgruppen sind in den Sprachgebiet-Gruppen ungleich verteilt. Es nehmen mehr Frauen wie Männer an den Tests teil, die Altersverteilung ist beim Geschlecht ähnlich. Die dritte Altersgruppe mit Personen über 55 Jahren ist am kleinsten.
+
+\begin{figure}[H] 
+    \centering 
+        \subfloat{\includegraphics[width=7cm]{Images/beispiel_deskriptiv_datB_mosaic.pdf}}
+        \subfloat{\includegraphics[width=7cm]{Images/beispiel_deskriptiv_datB_mosaic2.pdf}}
+        \caption{Mosaikplots zur Darstellung der Sub-Gruppen-Grösse für Alter, Geschlecht und Sprachgebiet (1=deutschsprachig, 2=französischsprachig)} 
+  \label{grafik_beispiel_mosaic}
+\end{figure}
+
+
+\subsection*{b. Modellberechnung}
+Das Modell wird zunächst vollständig berechnet. Nachdem ersichtlich wird, das das Sprachgebiet keinen statistisch signifikanten Einfluss hat, wird dieser Term aus dem Modell ausgeschlossen. 
+
+$\hat{\sigma}_S^2$ beträgt 1.21, $\hat{\sigma}_\epsilon^2$ ist gleich 3.47. Die \emph{Intraclass Correlation} beträgt 0.25. Es gibt nur eine mässige Variabilität zwischen den Personen.  
+
+Abbildung \ref{abbildung_beispiel_taste_datB} zeigt die Schätzungen für die Level-Kombinationen der Faktoren Alter-, Geschlecht- und Produkt. Das Produkt \texttt{Lindt D} wird bei allen Sub-Gruppen am höchsten bewertet, am schlechtesten das Produkt \texttt{Ritter}. Die Bewertung 8 erreicht nur das Produkt \texttt{Lindt D}, wobei das Vertrauensintervall auch Bewertungen unter 8 umschliesst. In dieser Grafik sieht man, dass Männer ein Produkt nicht zwingend höher bewerten wie Frauen und dass ältere Menschen nicht zwingend höher bewerten als jüngere. Weil Wechselwirkungen zwischen dem Geschlecht und der Altersgruppe, dem Geschlecht und dem Produkt und zwischen der Altersgruppe und dem Produkt  eingeführt wurden, heben sich diese Tendenzen etwas auf. 
+
+% Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=12cm]{Images/beispiel_lmer_datB_Taste_latex.pdf}
+\caption{Datensatz B: Schätzungen der Bewertungen des Geschmacks durch ein Mixed Model für das Alter, Geschlecht und Produkt.}
+\label{abbildung_beispiel_taste_datB}
+\end{figure}
+
+\begin{alltt}
+# Modell-Output aus R
+# ---
+# Linear mixed model fit by REML 
+# Formula: taste ~ (product + age_new + gen)^2 + (1 | NJ) 
+#    Data: dat 
+#   AIC  BIC logLik deviance REMLdev
+#  5066 5248  -2497     4978    4994
+# Random effects:
+#  Groups   Name        Variance Std.Dev.
+#  NJ       (Intercept) 1.2137   1.1017  
+#  Residual             3.4656   1.8616  
+# Number of obs: 1174, groups: NJ, 196
+# 
+# Fixed effects:
+#                              Estimate Std. Error t value
+# (Intercept)                   5.77211    0.36730  15.715
+# productFrey                  -0.50662    0.43108  -1.175
+# productCailler               -0.24464    0.42346  -0.578
+# productLindt CH               1.02883    0.44935   2.290
+# productLindt F                0.92609    0.44429   2.084
+# productLindt D                1.99259    0.45430   4.386
+# productAldi                   0.53887    0.45940   1.173
+# productRitter                -0.65358    0.44551  -1.467
+# age_new35-54                  0.43143    0.44878   0.961
+# age_new55-                    1.80295    0.51164   3.524
+# genmale                       0.93259    0.49704   1.876
+# productFrey:age_new35-54     -0.29562    0.51552  -0.573
+# productCailler:age_new35-54   0.16456    0.51957   0.317
+# productLindt CH:age_new35-54 -0.47878    0.53442  -0.896
+# productLindt F:age_new35-54  -0.61600    0.53079  -1.161
+# productLindt D:age_new35-54  -0.40879    0.53671  -0.762
+# productAldi:age_new35-54     -0.40079    0.53916  -0.743
+# productRitter:age_new35-54    0.03894    0.52850   0.074
+# productFrey:age_new55-       -0.60542    0.59690  -1.014
+# productCailler:age_new55-    -0.47129    0.60088  -0.784
+# productLindt CH:age_new55-   -1.53961    0.61301  -2.512
+# productLindt F:age_new55-    -1.13650    0.59880  -1.898
+# productLindt D:age_new55-    -1.05941    0.60777  -1.743
+# productAldi:age_new55-       -0.35003    0.63048  -0.555
+# productRitter:age_new55-     -0.78827    0.60818  -1.296
+# productFrey:genmale           0.32095    0.45955   0.698
+# productCailler:genmale        0.31412    0.47278   0.664
+# productLindt CH:genmale      -0.99125    0.47332  -2.094
+# productLindt F:genmale        0.06264    0.46557   0.135
+# productLindt D:genmale       -0.48301    0.46900  -1.030
+# productAldi:genmale          -0.01434    0.47458  -0.030
+# productRitter:genmale         0.01210    0.47109   0.026
+# age_new35-54:genmale         -0.47580    0.48527  -0.980
+# age_new55-:genmale           -0.83297    0.56253  -1.481
+
+# Analysis of Variance Table
+#                 Df Sum Sq Mean Sq F value
+# product          7 464.71   66.39 19.1560
+# age_new          2  42.26   21.13  6.0975
+# gen              1  13.90   13.90  4.0103
+# product:age_new 14  45.50    3.25  0.9379
+# product:gen      7  43.39    6.20  1.7885
+# age_new:gen      2   7.71    3.85  1.1123
+\end{alltt}
+
+\subsection*{c. Residuenanalyse}
+Mit den Residuen wird die Normalverteilungsannahme überprüft. Als Residuen können bei Mixed Models zwei Typen auftreten. Residuum I ist das allgemein bekannte Residuum, nämlich Beobachtung minus die geschätzten Parameter aus dem Modell. Residuum II ist die Beobachtung minus die festen Effekte. Von den Residuen I ist bekannt, dass sie normalverteilt sein sollten. Die Residuen II sollten wegen der Additivität der Normalverteilung ebenfalls normalverteilt sein. In dieser Residuenanalyse werden die Residuen I verwendet.
+
+Abbildung \ref{grafik_beispiel_tukey} zeigt zwei Grafiken. Die erste hat auf der X-Achse die Beobachtungen und auf der Y-Achse die Residuen I. Die Grafik zeigt eine Verletzung der Normalverteilungsannahme im Hinblick auf den konstanten Erwartungswert 0. Tiefe Bewertungen werden überschätzt, hohe Bewertungen unterschätzt. Dies ist ein bekanntes Muster bei limitierten Antwortemöglichkeiten und kann auch nicht mit einer Transformation der Zielvariablen umgangen werden. Die Varianz ist konstant. Die Grafik rechts zeigt auf der X-Achse die Produktegruppe und auf der Y-Achse die Residuen I. Die Annahme Erwartungswert 0 und konstante Varianz ist nicht verletzt.
+
+In der Abbildung \ref{grafik_beispiel_qqnorm} sind die theoretischen und die echten Quantile der Residuen I aufgetragen. Auch hier ist keine Verletzung der Normalverteilung erkennbar.
+
+\begin{figure}[H] 
+    \centering 
+        \subfloat{\includegraphics[width=7cm]{Images/beispiel_tukey_taste_residI.pdf}}
+        \subfloat{\includegraphics[width=7cm]{Images/beispiel_tukey_product_residI.pdf}}
+        \caption{Überprüfung der konstanten Varianz und dem Erwartungswert 0.} 
+  \label{grafik_beispiel_tukey}
+\end{figure}
+
+\begin{figure} [H]
+\centering
+\includegraphics[width=8cm]{Images/beispiel_qqnorm_residI.pdf}
+\caption{Normal Q-Q-Plot.}
+\label{grafik_beispiel_qqnorm}
+\end{figure}
+
+\subsection*{d. Schlussfolgerung}
+Falls die Bewertung 8 als Benchmark gilt, hat keine der Schokoladen das Ziel erreicht. 
+
+
+% =====
+% Umsetzung in SPSS
+\section{Umsetzung in SPSS}
+SPSS ist eine Statistik-Software und Lizenzpflichtig. Das Programm kann via Menüleiste oder auch via Syntax bedient werden. SPSS Menüs können durch eigene Menüpunkte ergänzt werden. Diese werden mit Hilfe von einem Dialogfeld konstruiert. Ein Dialogfeld stellt ein eigenes Objekt dar und kann mit anderen Benutzern ausgetauscht und an einem beliebigen Menüort installiert werden.
+
+\subsection{Dialogfelder}
+SPSS berechnet sowohl Repeated Measures ANOVA als auch Mixed Models. Für eine standardisierte Benutzung wurden zwei Dialogfelder generiert. 
+
+\begin{enumerate}
+	\item Analyse Konsumententest: Die Zielvariable, die festen Faktoren und der zufällige Faktor werden vorgegeben. Das Dialogfeld berechnet ein Repeated Measures ANOVA (ohne Wechselwirkungen). Output: Parameterschätzungen und ANOVA-Tabelle
+	\item Grafik Konsumententest: Generiert anhand der Parameterschätzungen des Modell aus Dialogfeld 1 eine Grafik. Kann maximal 4 erklärende Variablen umfassen, mehr kann und soll in einer Grafik nicht dargestellt werden. Output: Grafik.
+\end{enumerate}
+
+Für die Installation und Anwendung von Dialogfeldern in SPSS gibt es eine Anleitung. Die Dialogfelder und die Anleitungen liegen auf der beigelegten CD bereit.
+
+% =====
+% Umsetzung in R
+\section{Umsetzung in R}
+\label{section: umsetzung in R}
+\texttt{R} ist eine Open-Source Software (kostenlos) und kann unter http://www.r-project.org/ heruntergeladen genutzt werden. \texttt{R} ist eine Implementation von S, die Resultate werden über eine Syntax generiert. Von SPSS weicht \texttt{R} unter anderem ab, weil mit \texttt{R} objektorientiert programmiert wird. In der Regel wird mit einem einem Editor gearbeitet, z.B. Tinn-R oder NotepadPlus, welche ebenfalls kostenlos sind.
+
+Für das Thema Mixed Models und die Funktion \texttt{lmer()} existiert eine eigene R-Help, für die man sich unter http://stat.ethz.ch/CRAN/ > Mailing-List > R-sig-mixed-models anmelden kann und die einen reichen Fundus an bereits gestellten Fragen zu Mixed Models und \texttt{lmer()} bietet.
+
+Eine gute Einführung in \texttt{R} bietet beispielsweise \emph{An Introduction to R: Software for Statistical Modelling \& Computing (Course Materials and Exercisis)} von Kuhnert und Venables (2005) (http://www.csiro.au/resources/Rcoursenotes.html, Zugriff: 2009-11-24) oder \emph{Programmieren mit R} von Ligges (2009) das beim Springer-Verlag in Heidelberg erschienen ist.
+
+\subsection{Syntaxmöglichkeiten}
+Die Modelle aus Kapitel \ref{Kapitel_bisher}, \ref{Kapitel_MLM} und \ref{Kapitel_MM} können mit \texttt{R}  auf verschiedene Arten berechnet werden. In den Beispielen folgt jeweils die Syntax-Schreibweise und der Output dazu.
+
+Zwei Punkte zur Implementation in R:
+\begin{itemize}
+	\item In \texttt{R} sind die Kontraste anders gesetzt. Statt $\sum_i A_i=0$ wird jeweils der erste Parameter eines Faktors Null gesetzt: $A_1=0$. Bei SPSS wird das letzte Level gleich 0 gesetzt. Mit diesen Änderungen ändert sich die Interpretation des 'Gesamtmittels' $\mu$. Die Default-Kontraste können bei beiden Programmen angepasst werden.
+	\item Um den die Sum of Squares nach Typ II oder III zu generieren, wird die Funktion \texttt{Anova()} aus der Library \texttt{car} Funktion benötigt.
+	\item Fehlende Werte in einem Repeated Measures Design verändern die Balancierung der Daten. Die Funktion \texttt{aov()} verlangt aber nach einer Balancierung im Sinn der Produkte. Deshalb werden im Datensatz diejenigen Personen aus der Analyse ausgeschlossen, die nur einen Teil der zu testenden Produkte bewertet haben. Bei der Funktion \texttt{lmer()} werden lediglich die Beobachtungen mit den fehlenden Werten aus dem Modell ausgeschlossen. 
+	 \item Für unkorrelierte Fehlerterme wird mehrmals \texttt{( | )} verwendet. Zum Beispiel \texttt{(1 | subject) + (age -1 | subject)}
+\end{itemize}
+
+Für eine Beispiels-Auswertung in R und die Berechnung der Vertrauensintervalle wurde ein Syntax-File erstellt. Beides ist auf der beigelegten CD. 
+
+%%%
+\subsubsection{ANOVA ohne Personeneffekt $\rightarrow$ \texttt{aov()}}
+Die Faktoren \texttt{age, gender, product} sind feste Effekte.\\
+Dieses Modell beschreibt die Situation nur \underline{ungenügend}. Grundsätzlich sind die P-Werte der Faktoren \texttt{gender}, \texttt{age} und \texttt{gender:age} zu klein und suggerieren damit unter Umständen eine statistische Signifikanz, die gar keine ist. Die P-Werte der Faktoren \texttt{product}, \texttt{age:product} und \texttt{gender:product} sind hingegen zu gross. Vorhandene Effekte werden möglicherweise gar nicht entdeckt, weil nicht signifikant. Die Unbalanciertheit des Modells kann diesen Grundsatz etwas stören.
+
+\begin{alltt}
+mod <- aov(taste ~ (product + age + gender)^2, data = dat)
+mod <- aov(taste ~ product + age + gender + age:gender + 
+           + age:product + gender:product, data = dat) \emph{# ist dasselbe}
+summary(mod)
+
+# Analysis of Variance Table
+# - - - - - - - - - - - - - - - - -
+#                  Df Sum Sq Mean Sq F value    Pr(>F)    
+# product           3  567.3   189.1 43.9355 < 2.2e-16  \emph{## zu \textcolor{red}{\textbf{grosser}} P-Wert}
+# age               2   51.9    26.0  6.0304  0.002447  \emph{## zu \textcolor{red}{kleiner} P-Wert}
+# gender            1    6.8     6.8  1.5851  0.208166  \emph{## zu \textcolor{red}{kleiner} P-Wert}    
+# product:age       6   16.5     2.7  0.6377  0.700166  \emph{## zu \textcolor{red}{\textbf{grosser}} P-Wert}   
+# product:gender    3    3.0     1.0  0.2313  0.874623  \emph{## zu \textcolor{red}{\textbf{grosser}} P-Wert}    
+# age:gender        2    3.8     1.9  0.4420  0.642780  \emph{## zu \textcolor{red}{kleiner} P-Wert}  
+# Residuals      2058 8857.1     4.3   
+\end{alltt}
+
+Man beachte, dass diese ANOVA-Tabelle dem Typ I entspricht, siehe Unterkapitel \emph{Balancierung} in Kapitel \ref{Kapitel_bisher}. Für Typ II oder III kann die Funktion \texttt{Anova} aus dem Package \texttt{car} verwendet werden. 
+
+\begin{alltt}
+library(car)
+help(Anova)   \emph{# Informationen über die Bedeutung der verschiedenen Varianten}
+Anova(mod)
+
+# Analysis of Variance Table (Type II tests)
+# - - - - - - - - - - - - - - - - - - - - - -
+# Response: Taste
+#                Sum Sq   Df F value    Pr(>F)    
+# product         567.3    3 43.9355 < 2.2e-16  \emph{## zu \textcolor{red}{\textbf{grosser}} P-Wert}
+# age              49.6    2  5.7571  0.003211  \emph{## zu \textcolor{red}{kleiner} P-Wert} 
+# gender            6.8    1  1.5851  0.208166  \emph{## zu \textcolor{red}{kleiner} P-Wert}   
+# product:age      16.6    6  0.6433  0.695640  \emph{## zu \textcolor{red}{\textbf{grosser}} P-Wert}    
+# product:gender    3.0    3  0.2313  0.874623  \emph{## zu \textcolor{red}{\textbf{grosser}} P-Wert}    
+# age:gender        3.8    2  0.4420  0.642780  \emph{## zu \textcolor{red}{kleiner} P-Wert}    
+# Residuals      8857.1 2058 
+\end{alltt}
+
+%%%
+\subsubsection{Repeated Measures ANOVA $\rightarrow$ \texttt{aov()}}
+Das korrekte Modell lautet: \texttt{age, gender, product} sind feste Effekte, \texttt{subject} ist ein zufälliger Effekt. \texttt{subject} ist in \texttt{age, gender} geschachtelt. \texttt{product} ist mit \texttt{subject} gekreuzt.
+
+\begin{alltt}
+mod.aov1 <- aov(taste ~ (product + age + gender)^2 + Error(subject), data = dat)
+summary(mod.aov1)
+
+# Analysis of Variance Table
+# - - - - - - - - - - - - - - 
+# Error: subject
+#             Df Sum Sq Mean Sq F value  Pr(>F)  
+# age          2   51.9    26.0  3.1313 0.04449
+# gender       1    6.8     6.8  0.8231 0.36470  
+# age:gender   2    3.8     1.9  0.2295 0.79498  
+# Residuals  513 4251.9     8.3                  
+# ---
+# Error: Within
+#                  Df Sum Sq Mean Sq F value Pr(>F)    
+# product           3  567.3   189.1 63.4361 <2e-16
+# product:age       6   16.5     2.7  0.9207 0.4788    
+# product:gender    3    3.0     1.0  0.3340 0.8008    
+# Residuals      1545 4605.3     3.0    
+\end{alltt}
+
+Wird die Formel wie in \texttt{mod.aov2} geschrieben, entspricht der Modelloutput einem vollständig randomisierten ANOVA Design. 
+
+\begin{alltt}
+mod.aov2 <- aov(taste ~ (age + gender + product)^2 + subject, data = dat)
+summary(mod.aov2)
+
+# Analysis of Variance Table
+# - - - - - - - - - - - - - - 
+#                 Df Sum Sq Mean Sq F value    Pr(>F)    
+# product           3  567.3   189.1 63.4361 < 2.2e-16
+# age               2   51.9    26.0  8.7069 0.0001737 \emph{## viel zu \textcolor{red}{kleiner} P-Wert}
+# gender            1    6.8     6.8  2.2887 0.1305246 \emph{## viel zu \textcolor{red}{kleiner} P-Wert}   
+# subject         515 4255.7     8.3  2.7723 < 2.2e-16
+# product:age       6   16.5     2.7  0.9207 0.4788419  
+# product:gender    3    3.0     1.0  0.3340 0.8007916    
+# age:gender        2    3.8     1.9  0.2295 0.79498   \emph{## zu \textcolor{red}{kleiner} P-Wert}
+# Residuals      1545 4605.3     3.0
+\end{alltt}
+
+Um die Repeated Measures ANOVA-Tabelle aufzustellen, müssen die korrekten F-Werte berechnet werden.
+\begin{alltt}
+# Analysis of Variance Table
+# - - - - - - - - - - - - - - 
+#                  Df Sum Sq Mean Sq   F value    Pr(>F)    
+# age               2   51.9    26.0    26/8.3   0.04444  \emph{## 1-pf(26/8.3,2,515)}
+# gender            1    6.8     6.8   6.8/8.3   0.36581  \emph{## 1-pf(6.8/8.3,1,515)}
+# age:gender        2    3.8     1.9   1.9/8.3   0.79548  \emph{## 1-pf(1.9/8.3,2,515)}
+# subject         515 4255.7     8.3    2.7723 < 2.2e-16
+# ---
+# product           3  567.3   189.1   63.4361 < 2.2e-16
+# product:age       6   16.5     2.7    0.9207 0.4788419  
+# product:gender    3    3.0     1.0    0.3340 0.8007916 
+# Residuals      1545 4605.3     3.0 
+\end{alltt}
+
+Der Output wird in R nicht so ausgegeben - die Interaktion zwischen gender und age kann nicht berechnet werden, weil das Modell überbestimmt ist.
+
+%%% 
+\newpage
+\subsubsection{Repeated Measures ANOVA $\rightarrow$ \texttt{lmer()}}
+\texttt{age, gender, product} sind feste Effekte, \texttt{subject} ist ein zufälliger Effekt. Der Output von \texttt{lmer()} hat Informationen zu den Parameterschätzungen, Korrelation zwischen den Parametern, $\hat{\sigma}_S^S$, $\hat{\sigma}_\epsilon^2$. Es werden keine P-Werte angegeben. Für den Grund dafür siehe Unterkapitel \ref{bootstrap}. Die ANOVA-Tabelle entspricht einem Typ I Test, also sequentiell.
+
+\begin{alltt}
+library(lme4)  \emph{# Package für die Funktion lmer()}
+mod.lmer <- lmer(taste ~ (product + age + gender)^2+ (1 | subject), data = dat)
+
+anova(mod.lmer)
+
+# Analysis of Variance Table
+# - - - - - - - - - - - - - - 
+# Analysis of Variance Table
+#                Df Sum Sq Mean Sq F value
+# product         3 567.26  189.09 63.4360
+# age             2  18.67    9.33  3.1310
+# gender          1   2.45    2.45  0.8230
+# product:age     6  16.47    2.74  0.9207
+# product:gender  3   2.99    1.00  0.3340
+# age:gender      2   1.37    0.68  0.2295
+
+summary(mod.lmer)
+
+# Linear mixed model fit by REML 
+# - - - - - - - - - - - - - - - -
+# Formula: taste ~ (product + age + gender)^2 + (1 | subject) 
+#    Data: datA 
+#   AIC  BIC logLik deviance REMLdev
+#  8741 8854  -4351     8671    8701
+# Random effects:
+#  Groups   Name        Variance Std.Dev.
+#  subject  (Intercept) 1.3269   1.1519    ## sigma^2 (Subject)
+#  Residual             2.9808   1.7265    ## sigma^2 (Epsilon)
+# Number of obs: 2076, groups: subject, 519
+
+# Fixed effects:  \emph{## Parameterschätzungen}
+# \dots
+#
+# Correlation of Fixed Effects:  \emph{## Korrelation der Parameterschätzungen}
+# \dots
+\end{alltt}
+
+%%%
+\subsubsection{Erweitertes Mixed Model $\rightarrow$ \texttt{lmer()}}
+\begin{alltt}
+library(lme4)  \emph{# Package für die Funktion lmer()}
+mod.lmer <- lmer(taste ~ (product + age + gender)^2 
+    		+ (age | subject), data = dat)
+
+anova(mod.lmer)
+
+# Analysis of Variance Table
+# - - - - - - - - - - - - - - 
+#                Df Sum Sq Mean Sq F value
+# product         3 567.26  189.09 63.4360
+# age             2  18.54    9.27  3.1107
+# gender          1   2.27    2.27  0.7625
+# product:age     6  16.47    2.74  0.9207
+# product:gender  3   2.99    1.00  0.3340
+# age:gender      2   1.32    0.66  0.2207
+
+summary(mod.lmer)
+
+# Linear mixed model fit by REML 
+# - - - - - - - - - - - - - - - -
+# Linear mixed model fit by REML 
+# Formula: Taste ~ (product + age + gender)^2 + (age | subject) 
+#    Data: dat 
+#   AIC  BIC logLik deviance REMLdev
+#  8750 8891  -4350     8670    8700
+# Random effects:
+#  Groups   Name        Variance Std.Dev. Corr          
+#  subject  (Intercept) 1.49186  1.22142                
+#           age35-54    0.46828  0.68431  -0.413        
+#           age55-      1.00943  1.00470  -0.556  0.230 
+#  Residual             2.98077  1.72649                
+# Number of obs: 2076, groups: subject, 519
+
+# Fixed effects:  \emph{## Parameterschätzungen}
+# \dots
+#
+# Correlation of Fixed Effects:  \emph{## Korrelation der Parameterschätzungen}
+# \dots
+\end{alltt}
+
+
+
+%%%
+%balanciertes Design heisst: gleichviele Beobachtungen pro Untergruppe (bsp: table(gender, age), überalle r)
+%(1) Missings
+%	ja: (2) Homogenitätsannahme ok?
+%		Ja: lmer(y ~ . + (. | S))
+%		Nein: korrektur mit Greenhouse, dann lmer
+%	Nein: (2) Homogenitätsannahme ok?
+%		Ja: aov(y ~ . + Error(S))
+%		Nein: aov(cbind(y_1, y_2, ...) ~ .)
+%	
+%		
+%%% 
+%WW?
+
+% = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =
+% Diskussion und Ausblick
+
+\chapter{Diskussion und Ausblick}
+\label{Kapitel_Diskussion}
+Das Modell kann durch Wechselwirkungen und eine weitere Variable ergänzt werden. Wird die Homogenitätsannahme verletzt, muss nach Modellalternativen gesucht werden. 
+
+\section{Wechselwirkungen}
+In der Implementation des Repeated Measures ANOVA in SPSS wurden keine Wechselwirkungen berücksichtigt. Eine Ergänzung des Modells mit Wechselwirkungen wäre jedoch von Vorteil. Wenn gewisse Produkte nur bei gewissen Altersgruppen oder Geschlechtern ankommen, kann das für das Marketing wichtig sein. 
+
+%Bei einer balancierten Varianzanalyse addieren sich die Sum of Squares zusammen zum Total. Werden Wechselwirkungen hinzugefügt, bleiben die Sum of Squares der bereits im Modell vorhandenen Faktoren dieselben und die Sum of Squares der Wechselwirkungen werden von den Sum of Squares der Residuen subtrahiert. Die Freiheitsgrade der Residuen werden damit kleiner, aber die Sum of Squares auch. Haben die Wechselwirkungen keinen signifikanten Effekt, können die P-Werte der F-Tests leicht erhöhen, das hängt von den Freiheitsgraden der Residuen ab. Im umgekehrten Fall können die P-Werte etwas kleiner werden.
+
+%Im Fall von Lindt \& Sprüngli ist die Varianzanalyse nicht balanciert. Das hat zu Folge, dass sich die Sum of Squares nicht mehr einfach zusammengezählt werden können. Mit einer Hinzunahme eines neuen Faktors oder einer Wechselwirkung in das Modell, verändern sich die Sum of Squares der bereits im Modell vorhandenen Faktoren mit. Aus diesem Grund lautet die Empfehlung, dass nur Wechselwirkungen in das Modell einfliessen sollten, die auch wirklich einen Einfluss haben. 
+
+\section{Kaufabsicht}
+Die Personen werden manchmal vor dem Testen des Produktes und nach dem Testen des Produktes gefragt, ob sie das Produkt kaufen würden. Damit wird ein neuer Varaiblen-Typ eingeführt. Die Variable kann sich pro Person von Produkt zu Produkt ändern.
+
+\begin{itemize} 
+\item \texttt{PIBT}: Purchaseintent before testing
+	\begin{itemize}
+		\item sicher nicht kaufen
+		\item wahrscheinlich nicht kaufen
+		\item weiss nicht, ob ich kaufen würde
+		\item wahrscheinlich kaufen
+		\item sicher kaufen
+	\end{itemize}
+\item \texttt{PIAT}: Purchaseintent after testing
+	\begin{itemize}
+		\item sicher nicht kaufen
+		\item wahrscheinlich nicht kaufen
+		\item weiss nicht, ob ich kaufen würde
+		\item wahrscheinlich kaufen
+		\item sicher kaufen
+	\end{itemize}
+\end{itemize}
+
+Mit diesen beiden fünfstufigen Faktoren möchte man herausfinden, ob sich das Kaufverhalten mit dem Testen des Produktes ändert. Die Levels können in zwei Kategorien eingeteilt werden: \emph{kaufen} und \emph{nicht kaufen}. Sicher nicht kaufen, wahrscheinlich nicht kaufen, weiss nicht, ob ich kaufen würde gehören zu \texttt{nicht kaufen}. Wahrscheinlich kaufen und sicher kaufen gehören zu \texttt{kaufen}. Damit sind zwei Faktoren mit je zwei Levels entstanden. 
+
+\begin{itemize} 
+	\item \texttt{PIBT2}: Purchaseintent before testing, \texttt{nicht kaufen}, \texttt{kaufen}.
+	\item \texttt{PIAT2}: Purchaseintent after testing, \texttt{nicht kaufen}, \texttt{kaufen}.
+\end{itemize}
+
+Die Abbildung \ref{abbildung:mosaic_pi} zeigt einen Mosaik-Plot für die beiden Faktoren. Vor dem Testen würden etwa 80\% der Personen das Produkt kaufen, nach dem Testen davon nur noch etwas mehr als 50\%. Von den 20\% der Personen, die vor dem Testen das Produkt nicht kaufen würden, lässt sich etwa 1/6 umstimmen.
+
+% Bild
+\begin{center}
+\begin{figure} [H]
+\includegraphics[width=12cm]{Images/deskriptiv_datA_mosaic_pi.pdf}
+\caption{Mosaik-Plot der Kaufabsicht vor und nach dem Testen.}
+\label{abbildung:mosaic_pi}
+\end{figure}
+\end{center}
+
+Die Einführung dieses Faktors in das Modell ist insofern kritisch, als dass der Faktor sich mit dem \emph{within-subject} Faktor ändern kann - die Kaufabsicht kann sich pro Produkt ändern. Bei diesem Modell waren die Produkte allerdings Pralinés und die Kaufabsicht wurde für alle Produkte auf einmal abgefragt, was den Faktor zu einem \emph{between-subject} Faktor macht.
+
+Der Modelloutput für den Datensatz A, Zielvariable Taste sieht folgendermassen aus:
+
+\begin{alltt}
+# Linear mixed model fit by REML 
+# Formula: Taste ~ (product + Pibt2 + Piat2)^2 + (1 | subject) 
+#    Data: dat 
+#   AIC  BIC logLik deviance REMLdev
+#  8483 8568  -4227     8428    8453
+# Random effects:
+#  Groups   Name        Variance Std.Dev.
+#  subject  (Intercept) 0.67576  0.82204 
+#  Residual             2.94830  1.71706 
+# Number of obs: 2068, groups: subject, 517
+# 
+# Fixed effects:
+#                 Estimate Std. Error t value
+# (Intercept)       4.9451     0.1819  27.190
+# product2          1.7344     0.2264   7.660
+# product3          1.0205     0.2264   4.507
+# product4          2.1510     0.2264   9.499
+# Pibt2B            1.1945     0.2251   5.307
+# Piat2B            1.9616     0.3578   5.483
+# product2:Pibt2B  -0.6807     0.2755  -2.471
+# product3:Pibt2B  -0.3523     0.2755  -1.279
+# product4:Pibt2B  -0.6918     0.2755  -2.511
+# product2:Piat2B  -0.2619     0.2308  -1.135
+# product3:Piat2B   0.1071     0.2308   0.464
+# product4:Piat2B  -0.4444     0.2308  -1.925
+# Pibt2B:Piat2B    -0.5194     0.3500  -1.484
+
+# Analysis of Variance Table
+#               Df Sum Sq Mean Sq  F value
+# product        3 560.14  186.71  63.3296
+# Pibt2          1 308.22  308.22 104.5403
+# Piat2          1 423.21  423.21 143.5440
+# product:Pibt2  3  48.03   16.01   5.4307
+# product:Piat2  3  20.79    6.93   2.3504
+# Pibt2:Piat2    1   6.49    6.49   2.2018
+\end{alltt}
+
+
+% Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=12cm]{Images/lmer_datA_Taste_latex_pi.pdf}
+\caption{Kaufabsicht beim Datensatz A. N bedeutet \emph{Nicht kaufen} und B \emph{Kaufen}. Die Grafik ist in 4 Felder unterteilt. Die Spalten repräsentieren den Faktor \texttt{Pibt2} und die Zeilen den Faktor \texttt{Piat2}}.
+\label{abbildung_pi}
+\end{figure}
+
+Die Variabilität der Bewertungen innerhalb der Personen ist gering, die Intraclasscorrelation beträgt bloss 0.18. Das heisst, die Faktoren \texttt{Pibt2} und \texttt{Piat2} erklären einen grossen Teil der Variabilität zwischen den Personen, sodass der Personeneffekt sehr klein wird. Als Slope-Term könnte noch der Faktor \texttt{Pibt2} oder \texttt{Piat2} hineingenommen werden um zu sehen, in welcher Faktorkombination am meisten Variabilität unter den Personen herrscht. 
+
+Wie im Mosaikplot \ref{abbildung:mosaic_pi} ersichtlich ist, sind die Gruppengrössen ungleich. Die Personengruppe die das Produkt vor dem Testen nicht kaufen würden, danach aber schon, ist am kleinsten. Das wirkt sich auch auf die Vertrauensintervalle dieser Faktorkombination aus, die in der Grafik \ref{abbildung_pi} im Feld links unten sehr gross werden. Das Produkt 1 schneidet bei allen Gruppierungen am schlechtesten ab. Das Niveau der Personen, die das Produkt vor und nach dem Testen nicht kaufen würden, ist am tiefsten. Das Niveau der Personen, die die Produkte vor dem Testen nicht kaufen würden und nachher aber schon, ist zum Teil höher wie das Niveau der Personen, die das Produkt vor- und nachher kaufen würden. Das bedeutet: Personen aus der Gruppe die das Produkt vor dem Testen nicht kaufen würden sind schwer zu überzeugen. Ein Produkt muss sie schon sehr im Geschmack überraschen, damit sie sich umentscheiden. Um also die Personengruppe, die sich von \emph{nicht kaufen} zu \emph{kaufen} umentscheidet, zu künftigen Konsumenten zu machen, müssten sie das Produkt testen können. 
+
+%=========================================================
+\appendix % Ab hier beginnt der Anhang 
+%=========================================================
+
+\singlespacing
+%text wieder mit 1-fachem abstand (kürzt vielleicht deinen angang ein wenig...)
+
+% Literaturverzeichnis
+% Skripts
+% Fahrmeier
+% ... of linear regression
+
+ %\emph{Longitudinal Data Analysis} \cite{teil4} von Hedeker und Gibbons liefert einen guten Überblick über die Möglichkeiten, ebenfalls Kapitel 13 und 14 in \emph{Design and Analysis of Experiments} \cite{teil4b} von Montgomery.
+ 
+\begin{thebibliography}{99} 
+
+\subsection*{Varianzanalyse}
+\bibitem{mllm} Müller, M. (2006). \emph{Experimental Design}, Unveröffentlichtes Vorlesungsskript, Zürcher Hochschule für Angewandte Wissenschaften.
+\bibitem{roth} Roth, H. R. (2009).  \emph{Angewandte Varianzanalyse und Versuchsplanung}, Unveröffentlichtes Vorlesungsskript, Eidgenössische Technische Hochschule Zürich.
+%\subsection*{Univariates lineares Regressionsmodell}
+%\bibitem{stahel} Stahel, W. (????). \emph{Statistische Datenanalyse}, Vieweg Verlag.
+
+\subsection*{Longitudinal Data Analysis}
+\bibitem{hedeker} Hedeker, D. und Gibbons, D. (2006). \emph{Longitudial Data Analysis}, John Wiley \& Sons, Inc. (Kapitel 1 bis 4)
+%\bibitem{hedeker_web} Hedeker, Webseite
+\bibitem{montgomery} Montgomery, D. (2005). \emph{Design and Analysis of Experiments}, John Wiley \& Sons, Inc. (Kapitel 13 und 14 und 15.4)
+
+%\subsection*{Repeated Measures ANOVA}
+%\bibitem{fox} Fox, J. and Friendly, M. and Monette, G. (2007). Visual Hypothesis Tests in Multivariate Linear Models: The heplots Package for R, wo veröffentlicht?, von welcher zu welcher Seite?
+%%\bibitem{teil4} Stahel, W. (2006). \emph{Multivariate Statistik}, Unveröffentlichtes Vorlesungsskript, Eidgenössische Technische Hochschule Zürich, Kapitel 5: Multivariate Regression. 
+
+\subsection*{Mixed Model}
+\bibitem{bates} Pinheiro, J. C. und Bates, D. (2000). \emph{Mixed-effects models in S and S-Plus}, Springer-Verlag New York, Inc.
+%\bibitem{bates_Rnews} Bates, D. (????). \emph{R-news}
+%\bibitem{bates_vortraege} Bates, D. (????). \emph{div. Vorträge}
+%\bibitem{bates_Rhelp} Bates, D. (2006). http://tolstoy.newcastle.edu.au/R/help/06/05/27666.html
+
+\subsection*{Bootstrap}
+\bibitem{harrell} Harrell, F. Jr. (2001), \emph{Regression Modeling Strategies}, Springer-Verlag New York. (Seite 87 bis 90, 195 bis 201)\\
+
+%Faraway (evtl. Reto fragen)
+
+%Ruckstuhl, A. (2006). Statistisches Modellieren I: Statistische Regressionsrechnung und ihre Anwendung, unveröffentlichtes Vorlesungsskript, Zürcher Hochschule für Angewandte Wissenschaften.\
+
+\end{thebibliography} 
+
+%%=========================================================
+%% Begrifferklärungen
+%\chapter{Begriffe}
+%\label{Begriffe}
+
+%
+%\begin{itemize} 
+
+%	\item \textbf{cross-sectional}\\
+%	?
+%	\item \textbf{cross-over}\\ Longitudinal oder Repeated Measures Datensatz \\
+
+%	\item \textbf{Multinomiales Regressionsmodell}\\ Kategorielle Zielvariable mit $n$ Levels \\
+%	\item \textbf{Mulitvariates Regressionsmodell}\\ Mehrere Zielvariablen (z.B. bei Repeated Measures) \\
+
+%	\item \textbf{Homoskedastizität}\\ konstante Varianz über die Zeit \\
+%	\item \textbf{Heteroskedastizität}\\ keine konstante Varianz über die Zeit \\
+%	\item \textbf{Compound Symmetry}\\Homogenitätsannahme der Varianz-Kovarianz-Struktur \\
+%	\item \textbf{Balanciertes Design}\\ falls von den Levels eines Faktors oder von den Levels von Faktorkombinationen gleich viele Replikate vorhanden sind\\
+%	\item \textbf{Nested Factor} \\ geschachtelter Faktor, z.B. A ist in B geschachtelt, wenn nicht alle Levels von A in den Levels von B vorkommen. Gegenteil sind gekreuzte Faktoren, wo alle Levelkombinationen der Faktoren möglich sind\\
+
+%\end{itemize} 
+
+
+\chapter{Modelloutput}
+\label{anhang_modelloutput}
+
+Die Theorie der Kapitel \ref{Kapitel_bisher}, \ref{Kapitel_MLM} und \ref{Kapitel_MM} wurde auf die Datensätze von Lindt \& Sprüngli übertragen. In \ref{anhang_lm}, \ref{anhang_mlm} und \ref{anhang_mm} sind jeweils die ANOVA-Tabelle und die Grafik für den Geschmack und die Beschaffenheit des Datensatz A und B aufgeführt.\\
+Im Modell des Datensatzes A gibt es keine Wechselwirkungen, im Modell des Datensatzes B schon.
+
+\newpage
+%%
+\section{ANOVA ohne Personeneffekt}
+\label{anhang_lm}
+%% ----
+\subsection{taste $\backsim$ product + age + gender, data=datA}
+\begin{alltt}
+aov(taste ~ product + age + gender , data = datA)
+
+# Analysis of Variance Table
+# ---------------------------
+# Response: Taste
+#             Df Sum Sq Mean Sq F value    Pr(>F)    
+# product      3  567.3   189.1 44.0546 < 2.2e-16
+# age          2   51.9    26.0  6.0467  0.002408
+# gender       1    6.8     6.8  1.5894  0.207549    
+# Residuals 2069 8880.4     4.3     
+\end{alltt}
+% Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=10cm]{Images/lm_datA_Taste_latex.pdf}
+\caption{Datensatz A: Schätzungen der Bewertungen des Geschmacks für das Alter, Geschlecht und Produkt}
+\label{grafik:lm_taste_datA}
+\end{figure}
+
+%% ----
+\newpage
+\subsection{texture $\backsim$ product + age + gender, data=datA}
+\begin{alltt}
+aov(texture ~ product + age + gender, data = datA)
+
+# Analysis of Variance Table
+# ---------------------------
+# Response: Texture
+#             Df Sum Sq Mean Sq F value  Pr(>F)   
+# product      3   51.2    17.1  4.9000 0.00214
+# age          2   20.4    10.2  2.9332 0.05345
+# gender       1    4.0     4.0  1.1594 0.28171   
+# Residuals 2069 7203.9     3.5                 
+\end{alltt}
+% Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=10cm]{Images/lm_datA_Texture_latex.pdf}
+\caption{Datensatz A: Schätzungen der Bewertungen der Beschaffenheit für das Alter, Geschlecht und Produkt.}
+\label{grafik:lm_texture_datA}
+\end{figure}
+
+%% ----
+\newpage
+\subsection{taste $\backsim$ product + age + gender + Wechselwirkungen, data=datB}
+\begin{alltt}
+aov(taste ~ (product + age + gender)^2, data = datB)
+
+# Analysis of Variance Table
+# ---------------------------
+# Response: taste
+#                   Df Sum Sq Mean Sq F value    Pr(>F)    
+# product            7  483.7    69.1 14.8065 < 2.2e-16
+# age_new            2  130.9    65.5 14.0302 9.562e-07
+# gen                1   42.3    42.3  9.0606  0.002669
+# product:age_new   14   33.7     2.4  0.5165  0.924835    
+# product:gen        7   42.8     6.1  1.3108  0.241455    
+# age_new:gen        2   23.8    11.9  2.5534  0.078264  
+# Residuals       1140 5319.8     4.7                   
+\end{alltt}
+% Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=10cm]{Images/lm_datB_Taste_latex.pdf}
+\caption{Datensatz B: Schätzungen der Bewertungen des Geschmacks für das Alter, Geschlecht und Produkt. Die Nummerierung von 1 bis 8 entspricht Coop, Frey, Cailler, Lindt CH, Lindt F, Lindt D, Aldi, Ritter.}
+\label{grafik:lm_taste_datB}
+\end{figure}
+
+%% ----
+\subsection{texture $\backsim$ product + age + gender + Wechselwirkungen, data=datB}
+\begin{alltt}
+aov(texture ~ (product + age + gender)^2 , data = datB)
+
+# Analysis of Variance Table
+# ---------------------------
+# Response: texture
+#                   Df Sum Sq Mean Sq F value    Pr(>F)    
+# product            7  194.8    27.8  6.6242 1.070e-07
+# age_new            2   54.4    27.2  6.4792  0.001592
+# gen                1    0.8     0.8  0.2006  0.654321    
+# product:age_new   14   19.1     1.4  0.3254  0.990944    
+# product:gen        7   36.5     5.2  1.2418  0.276551    
+# age_new:gen        2    1.1     0.6  0.1355  0.873336    
+# Residuals       1139 4785.8     4.2  
+\end{alltt}
+% Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=10cm]{Images/lm_datB_Texture_latex.pdf}
+\caption{Datensatz B: Schätzungen der Bewertungen der Beschaffenheit für das Alter, Geschlecht und Produkt. Die Nummerierung von 1 bis 8 entspricht Coop, Frey, Cailler, Lindt CH, Lindt F, Lindt D, Aldi, Ritter.}
+\label{grafik:lm_texture_datB}
+\end{figure}
+
+
+%%%%%
+\newpage
+\section{Repeated Measures ANOVA}
+\label{anhang_mlm}
+Die Vertrauensintervalle der Ergebnisse des Datensatz A und B sind jeweils mit Boostrap gebildet worden. Die ANOVA-Tabelle entspricht dem gewöhnlichen Modelloutput und ist nicht durch Boostrap korrigiert worden.
+
+%% ---
+\subsection{taste $\backsim$ product + age + gender + Error(subject), data=datA}
+\begin{alltt}
+mod <- aov(taste ~ product + age + gender + Error(subject), data = datA)
+
+# Analysis of Variance Table
+# ---------------------------
+# Error: subject
+#            Df Sum Sq Mean Sq F value  Pr(>F)  
+# age         2   51.9    26.0  3.1407 0.04408
+# gender      1    6.8     6.8  0.8256 0.36398  
+# Residuals 515 4255.7     8.3                  
+# ---
+# Error: Within
+#             Df Sum Sq Mean Sq F value    Pr(>F)    
+# product      3  567.3   189.1  63.537 < 2.2e-16 ***
+# Residuals 1554 4624.7     3.0        
+
+\end{alltt}
+ % Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=10cm]{Images/lmer_datA_Taste_latex.pdf}
+\caption{Datensatz A: Schätzungen der Bewertungen des Geschmacks durch ein Repeated Measures Modell für das Alter, Geschlecht und Produkt.}
+%\label{grafik:lm_texture_datB}
+\end{figure}
+
+%% ----
+\subsection{texture $\backsim$ product + age + gender + Error(subject), data=datA}
+\begin{alltt}
+mod <- aov(texture ~ product + age + gender + Error(subject), data = datA)
+
+# Analysis of Variance Table
+# ---------------------------
+# Error: subject
+#            Df Sum Sq Mean Sq F value Pr(>F)
+# age         2   20.4    10.2  0.9582 0.3843
+# gender      1    4.0     4.0  0.3787 0.5385
+# Residuals 515 5489.1    10.7               
+# ---
+# Error: Within
+#             Df  Sum Sq Mean Sq F value    Pr(>F)    
+# product      3   51.18   17.06  15.461 6.508e-10
+# Residuals 1554 1714.82    1.10   
+
+\end{alltt}
+% Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=10cm]{Images/lmer_datA_Texture_latex.pdf}
+\caption{Datensatz A: Schätzungen der Bewertungen der Beschaffenheit durch ein Repeated Measures Modell für das Alter, Geschlecht und Produkt.}
+%\label{grafik:lm_texture_datB}
+\end{figure}
+
+%% ----
+\subsection{taste $\backsim$ product + age + gender + Wechselwirkungen + Error(subject), data=datB}
+\begin{alltt}
+mod <- lmer(taste ~ (product + age + gender)^2 + (1 | subject), data = datB)
+	
+# Linear mixed model fit by REML 
+# Formula: taste ~ (product + age + gender)^2 + (1 | subject) 
+#    Data: dat 
+#   AIC  BIC logLik deviance REMLdev
+#  5066 5248  -2497     4978    4994
+# Random effects:
+#  Groups   Name        Variance Std.Dev.
+#  subject   (Intercept) 1.2137   1.1017  
+#  Residual             3.4656   1.8616  
+# Number of obs: 1174, groups: NJ, 196
+#
+# Fixed effects:
+# ...
+
+# Analysis of Variance Table
+#                 Df Sum Sq Mean Sq F value
+# product          7 464.71   66.39 19.1560
+# age              2  42.26   21.13  6.0975
+# gender           1  13.90   13.90  4.0103
+# product:age     14  45.50    3.25  0.9379
+# product:gender   7  43.39    6.20  1.7885
+# age:gender       2   7.71    3.85  1.1123
+
+\emph{# zusätzlich mit der Bootstrap-Methode Vertrauensintervalle 
+der Parameterschätzungen bilden}
+\end{alltt}
+% Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=10cm]{Images/lmer_datB_Taste_latex.pdf}
+\caption{Datensatz B: Schätzungen der Bewertungen des Geschmacks durch ein Repeated Measures Modell für das Alter, Geschlecht und Produkt.}
+%\label{grafik:lm_texture_datB}
+\end{figure}
+
+%% ----
+\subsection{texture $\backsim$ product + age + gender + Wechselwirkungen +(1 | subject), data=datB}
+\begin{alltt}
+mod <- lmer(texture ~ (product + age + gender)^2 + (1 | subject), data = datB)
+
+# Linear mixed model fit by REML 
+# Formula: texture ~ (product + age + gender)^2 + (1 | subject) 
+#    Data: dat 
+#   AIC  BIC logLik deviance REMLdev
+#  4923 5106  -2426     4831    4851
+# Random effects:
+#  Groups   Name        Variance Std.Dev.
+#  subject   (Intercept) 1.1843   1.0883  
+#  Residual             3.0300   1.7407  
+# Number of obs: 1173, groups: NJ, 196
+#
+# Fixed effects:
+# ...
+
+# Analysis of Variance Table
+#                 Df  Sum Sq Mean Sq F value
+# product          7 187.907  26.844  8.8593
+# age              2  16.519   8.259  2.7259
+# gender           1   0.265   0.265  0.0873
+# product:age     14  18.379   1.313  0.4333
+# product:gender   7  34.139   4.877  1.6095
+# age:gender       2   0.329   0.165  0.0543
+
+\emph{# zusätzlich mit der Bootstrap-Methode Vertrauensintervalle 
+der Parameterschätzungen bilden}
+\end{alltt}
+% Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=10cm]{Images/lmer_datB_Texture_latex.pdf}
+\caption{Datensatz B: Schätzungen der Bewertungen der Beschaffenheit durch ein Repeated Measures Modell für das Alter, Geschlecht und Produkt.}
+%\label{grafik:lm_texture_datB}
+\end{figure}
+
+
+%%%%%
+\newpage
+\section{Mixed Model}
+\label{anhang_mm}
+Die Vertrauensintervalle der Ergebnisse des Datensatz A und B sind jeweils mit Boostrap gebildet worden. Die ANOVA-Tabelle entspricht dem gewöhnlichen Modelloutput und ist nicht durch Boostrap korrigiert worden.
+
+%% ---
+\subsection{taste $\backsim$ product + age + gender + (1 + age | subject), data=datA}
+\begin{alltt}
+mod <- lmer(Taste ~ (product + age + gender)^2 + (age | subject), data = datA)
+	
+# Linear mixed model fit by REML 
+# Formula: taste ~ product + age + gender + (age | subject) 
+#    Data: dat 
+#   AIC  BIC logLik deviance REMLdev
+#  8724 8803  -4348     8677    8696
+# Random effects:
+#  Groups   Name        Variance Std.Dev. Corr          
+#  subject  (Intercept) 1.48831  1.21996                
+#           age35-54    0.48215  0.69437  -0.415        
+#           age55-      0.99164  0.99581  -0.560  0.233 
+#  Residual             2.97602  1.72511                
+# Number of obs: 2076, groups: subject, 519
+#
+# Fixed effects:
+#             Estimate Std. Error t value
+# (Intercept)   6.3315     0.1341   47.22
+# product2      1.0925     0.1071   10.20
+# product3      0.8054     0.1071    7.52
+# product4      1.4085     0.1071   13.15
+# age35-54      0.2583     0.1422    1.82
+# age55-        0.4231     0.1845    2.29
+# gendermale    0.1160     0.1327    0.87
+
+# Analysis of Variance Table
+#         Df Sum Sq Mean Sq F value
+# product  3 567.26  189.09 63.5372
+# age      2  18.60    9.30  3.1255
+# gender   1   2.27    2.27  0.7644
+
+\emph{# zusätzlich mit der Bootstrap-Methode Vertrauensintervalle 
+der Parameterschätzungen bilden}
+\end{alltt}
+% Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=10cm]{Images/lmerSlope_datA_Taste_latex.pdf}
+\caption{Datensatz A: Schätzungen der Bewertungen des Geschmacks durch ein Mixed Model für das Alter, Geschlecht und Produkt.}
+%\label{grafik:lm_texture_datB}
+\end{figure}
+
+%% ----
+\subsection{texture $\backsim$ product + age + gender + (1 + age | subject), data=datA}
+
+\begin{alltt}
+mod <- lmer(texture ~ (product + age + gender)^2 + (age | subject), data = datA)
+
+# Linear mixed model fit by REML 
+# Formula: texture ~ product + age + gender + (age | subject) 
+#    Data: dat 
+#   AIC  BIC logLik deviance REMLdev
+#  7310 7389  -3641     7262    7282
+# Random effects:
+#  Groups   Name        Variance Std.Dev. Corr          
+#  subject  (Intercept) 2.8038   1.6745                 
+#           age35-54    2.1754   1.4749   -0.557        
+#           age55-      3.8405   1.9597   -0.715  0.398 
+#  Residual             1.1035   1.0505                 
+# Number of obs: 2076, groups: subject, 519
+#
+# Fixed effects:
+#             Estimate Std. Error t value
+# (Intercept)  7.55274    0.14246   53.02
+# product2     0.29672    0.06521    4.55
+# product3     0.20424    0.06521    3.13
+# product4     0.43160    0.06521    6.62
+# age35-54     0.06266    0.16368    0.38
+# age55-       0.28802    0.20727    1.39
+# gendermale   0.09575    0.14978    0.64
+
+# Analysis of Variance Table
+#         Df Sum Sq Mean Sq F value
+# product  3 51.183  17.061 15.4611
+# age      2  2.386   1.193  1.0811
+# gender   1  0.451   0.451  0.4086
+
+\emph{# zusätzlich mit der Bootstrap-Methode Vertrauensintervalle 
+der Parameterschätzungen bilden}
+\end{alltt}
+% Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=10cm]{Images/lmerSlope_datA_Texture_latex.pdf}
+\caption{Datensatz A: Schätzungen der Bewertungen der Beschaffenheit durch ein Mixed Model für das Alter, Geschlecht und Produkt.}
+%\label{grafik:lm_texture_datB}
+\end{figure}
+
+%% ----
+\subsection{taste $\backsim$ product + age + gender + (1 + age | subject), data=datB}
+\begin{alltt}
+mod <- lmer(taste ~ (product + age + gender)^2 + (age | subject), data = datB)
+	
+# Linear mixed model fit by REML 
+# Formula: taste ~ (product + age + gender)^2 + (age | subject) 
+#    Data: dat 
+#   AIC  BIC logLik deviance REMLdev
+#  5072 5280  -2495     4974    4990
+# Random effects:
+#  Groups   Name         Variance Std.Dev. Corr          
+#  subject  (Intercept)  1.11490  1.05589                
+#               age35-54 0.98064  0.99027  -0.271        
+#               age55-   0.34574  0.58799  -0.611  0.165 
+#  Residual              3.46567  1.86163                
+# Number of obs: 1174, groups: NJ, 196
+# 
+# Fixed effects:
+# ...
+
+# Analysis of Variance Table
+#                 Df Sum Sq Mean Sq F value
+# product          7 466.39   66.63 19.2249
+# age              2  53.00   26.50  7.6461
+# gender           1  12.60   12.60  3.6366
+# product:age     14  44.26    3.16  0.9122
+# product:gender   7  42.67    6.10  1.7590
+# age:gender       2   9.22    4.61  1.3301
+
+\emph{# zusätzlich mit der Bootstrap-Methode Vertrauensintervalle 
+der Parameterschätzungen bilden}
+\end{alltt}
+% Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=10cm]{Images/lmerSlope_datB_Taste_latex.pdf}
+\caption{Datensatz B: Schätzungen der Bewertungen des Geschmacks durch ein Mixed Model für das Alter, Geschlecht und Produkt.}
+%\label{grafik:lm_texture_datB}
+\end{figure}
+
+\subsection{texture $\backsim$ Product + age + gender + (1 + age | subject), data=datB}
+\begin{alltt}
+mod <- lmer(texture ~ (product + age + gender)^2 + (age | subject), data = datB)
+	
+# Linear mixed model fit by REML 
+# Formula: texture ~ (product + age + gender)^2 + (age | subject) 
+#    Data: dat 
+#   AIC  BIC logLik deviance REMLdev
+#  4931 5139  -2424     4828    4849
+# Random effects:
+#  Groups   Name         Variance Std.Dev. Corr          
+#  subject  (Intercept)  1.08004  1.03925                
+#               age35-54 0.89328  0.94514  -0.275        
+#               age55-   0.48681  0.69772  -0.521  0.143 
+#  Residual              3.02997  1.74068                
+# Number of obs: 1173, groups: NJ, 196
+# 
+# Fixed effects:
+# ....
+
+# Analysis of Variance Table
+#                 Df  Sum Sq Mean Sq F value
+# product          7 187.979  26.854  8.8628
+# age              2  17.995   8.997  2.9695
+# gen              1   0.264   0.264  0.0870
+# product:age     14  18.369   1.312  0.4330
+# product:gender   7  33.803   4.829  1.5937
+# age:gender       2   0.372   0.186  0.0614
+
+\emph{# zusätzlich mit der Bootstrap-Methode Vertrauensintervalle 
+der Parameterschätzungen bilden}
+\end{alltt}
+% Bild
+\begin{figure} [H]
+\centering
+\includegraphics[width=10cm]{Images/lmerSlope_datB_Texture_latex.pdf}
+\caption{Datensatz B: Schätzungen der Bewertungen der Beschaffenheit durch ein Mixed Model für das Alter, Geschlecht und Produkt.}
+%\label{grafik:lm_texture_datB}
+\end{figure}
+
+
+\end{document}

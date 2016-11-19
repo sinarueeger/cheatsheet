@@ -1,0 +1,333 @@
+\documentclass[11pt,twocolumn,vertical]{book}
+
+\usepackage{a4wide}
+\usepackage{german}
+\usepackage{shapepar}
+
+%
+% Seiten-Einstellungen
+%
+%  \topmargin      % oberer Rand
+%  \headheight     % Hoehe Kopf
+%  \headsep        % Abstand Kopf - Text
+%  \topskip        % Abstand zur ersten Textzeile
+%  \textheight     % Hoehe Text
+%  \footskip       % Abstand Text - Fuss
+%  \footheight     % Hoehe Fuss
+%  \oddsidemargin  % linker Rand
+%  \evensidemargin % zusaetzlicher linker Rand bei twoside
+%  \textwidth      % Breite Text
+%  \columnsep      % Abstand Spalten
+
+\addtolength{\topmargin}{-20mm}
+\addtolength{\textheight}{40mm}
+\addtolength{\textwidth}{10mm}
+\addtolength{\columnsep}{2ex}
+
+\voffset -2mm
+\hoffset -5mm
+
+%
+% Seiten Stil
+  \pagestyle{empty}
+%
+% Einrueckung des ersten Satzes eines Absatzes
+  \parindent 0pt
+%
+% Abstand zwischen Absaetzen
+  \parskip 1.0ex plus 0.5ex minus 0.5ex
+%
+% groessere Wortabstaende erlauben -> weniger Trennungen
+  \sloppy
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+\hrulefill
+
+\underline{Schriftgr"o"sen}
+
+{\tiny Schriftgr"o"se: tiny}
+
+{\scriptsize Schriftgr"o"se: scriptsize}
+
+{\footnotesize Schriftgr"o"se: footnotesize}
+
+{\small Schriftgr"o"se: small}
+
+{\normalsize Schriftgr"o"se: normalsize}
+
+{\large Schriftgr"o"se: large}
+
+{\Large Schriftgr"o"se: Large}
+
+{\LARGE Schriftgr"o"se: LARGE}
+
+{\Huge Schriftgr"o"se: Huge}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hrulefill
+
+\underline{Schrifttypen}
+
+\begin{tabular}[t]{ll}
+
+{\it italic} & {\it\em emphasized italic} \\
+
+{\sf sans serif} & {\sf\em emphasized sans serif} \\
+
+{\tt typewriter} & {\tt\em emphasized typewriter} \\
+
+{\bf bold face} & {\bf\em emphasized bold face} \\
+
+{\sl slanted} & {\sl\em emphasized slanted} \\
+
+{\rm roman} & {\rm\em emphasized roman} \\
+
+{\sc Small Caps} & {\sc\em emphasized Small Caps} \\
+
+{\em emphasize} & {\em\em emphasized emphasize :-) } \\
+
+\end{tabular}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hrulefill
+
+\underline{Abst"ande}
+
+{
+
+\parskip 0pt
+
+\bigskip
+
+gnaslgnasl ohne horizontalen Abstand
+
+gnasl\hspace{1pt}gnasl ein pt weiter rechts
+
+gnasl\hspace{1ex}gnasl ein ex weiter rechts
+
+gnasl\quad gnasl ein quad weiter rechts
+
+gnasl\hspace{1cm}gnasl ein cm weiter rechts
+
+gnasl\hfill gnasl nach hfill
+
+gnasl\dotfill gnasl nach dotfill
+
+42mm\hspace{42mm}gnasl\hfill hfill \hfill gnasl \hspace{42mm}42mm
+
+\bigskip
+
+gnasl
+
+gnasl ohne zus"atzlichen vertikalen Abstand
+
+\smallskip gnasl smallskipamount weiter unten
+
+\medskip gnasl medskipamount weiter unten
+
+\bigskip gnasl bigskipamount weiter unten
+
+\vspace{1pt}gnasl ein pt weiter unten
+
+\vspace{1ex}gnasl ein ex weiter unten
+
+\vspace{1cm}gnasl ein cm weiter unten
+
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hrulefill
+
+\underline{Linienbox}
+
+\rule[-1em]{2em}{2em}
+\rule[-0.5em]{1em}{1em}
+\rule[-1em]{1em}{1em}
+\rule[0em]{1em}{1em}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hrulefill
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hrulefill
+
+\underline{Ligaturen}
+
+{\tt ff}: ff\\
+{\tt f$\backslash$/f}: f\/f
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hrulefill
+
+\underline{Ausrichtungen}
+
+\begin{center}
+  center
+\end{center}
+
+\begin{flushleft}
+  flushleft
+\end{flushleft}
+
+\begin{flushright}
+  flushright
+\end{flushright}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hrulefill
+
+\underline{verbatim}
+
+\begin{verbatim}
+ich@octane:~ > latex test.tex > /dev/null
+
+[...]
+
+{\center {\bf gnasl}}
+\end{verbatim}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hrulefill
+
+\underline{itemize}
+
+\begin{itemize}
+  \item item 1
+  \item item 2 ist wesentlich l"anger und sorgt f"ur einen Zeilenumbruch der 
+        aber kein Problem ist, da dann halt einfach ein Zeilenumbruch 
+        eingebaut wird...
+  \begin{itemize}
+    \item ''subitem''
+  \end{itemize}
+  \item item 3
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hrulefill
+
+\underline{list}
+
+\begin{list}{$\bullet$}{\topsep 0ex \partopsep 0ex \itemsep 0ex}
+  \item gruen
+  \item blau
+\end{list}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hrulefill
+
+\underline{enumerate}
+
+\begin{enumerate}
+  \item Nummer 1
+  \begin{enumerate}
+    \item Nummer 1.1
+    \begin{enumerate}
+      \item Nummer 1.1.1
+      \begin{enumerate}
+        \item Nummer 1.1.1.1
+      \end{enumerate}
+    \end{enumerate}
+  \end{enumerate}
+\end{enumerate}
+\begin{enumerate}
+\item sdflkj
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hrulefill
+
+\newpage
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\underline{tabbing}
+
+\begin{tabbing}
+  Hersteller\quad\= Typ\quad\= Leistung \\[1ex]
+  Mercedes \> W110 \> 105 \\
+  Citro"en \> 2CV6 \> 26 \\
+  BMW \> R80GS \> 50
+\end{tabbing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hrulefill
+
+\underline{tabular}
+
+\begin{tabular}{|p{2.5cm}|p{2.5cm}||p{2.5cm}|}
+ \hline
+  Hersteller & Typ & Leistung \\[1ex]
+ \hline
+ \hline
+  Mercedes & W110 & 105 \\
+ \hline
+  Citro"en & 2CV6 & 26 \\
+ \hline
+  BMW & R80GS & 50 \\
+ \hline
+\end{tabular}
+
+\begin{tabular}{|l|c|r|}
+ \hline
+  \multicolumn{3}{|c|}{gnasl}\\
+ \hline
+  12345 & 23456 & 34567 \\
+  4 & 5 & 6 \\
+ \hline
+  \multicolumn{2}{c|}{ } & schwompf \\  \cline{3-3}
+\end{tabular}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hrulefill
+
+\underline{shapes, minipages, raisebox}
+
+\begin{minipage}[b]{0.5\textwidth}
+  \diamondpar{Ken Charles Barger, 47, accidentally shot himself to death in
+  December in Newton, N.C., when, awakening to the sound of a ringing 
+  telephone beside his bed, he reached for the phone but grabbed instead a 
+  Smith \& Wesson .38 Special, which discharged when he drew it to his ear.}
+\end{minipage}
+\raisebox{0.8cm}{
+\begin{minipage}[b]{0.5\textwidth}
+  \heartpar{In February, Santiago Alvarado, 24, was killed in Lompoc, CA, as 
+  he fell face-first through the ceiling of a bicycle shop he was 
+  burglarizing. Death was caused when the long flashlight he had placed in his 
+  mouth (to keep his hands free) rammed into the base of his skull as he hit 
+  the floor.}
+\end{minipage}}
+
+\shapepar\nutshape{The Ann Arbor News crime column reported that a man walked 
+into Burger King in Ypsilanti, Michigan at 7:50 am, flashed a gun and demanded 
+cash. The clerk turned him down because he said he couldn't open the cash 
+register without a food order. When the man ordered onion rings, the clerk 
+said they weren't available for breakfast. The man, frustrated, walked away.}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\hrulefill
+
+\end{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
