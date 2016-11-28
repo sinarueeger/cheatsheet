@@ -9,8 +9,10 @@ copy files for backup to
 >> just a reminder that the data on hpc (/data/) is not backed up. The folder /chuvdatarc/ is backed up and I strongly recommend you to rsync all your scripts and data (that would take a long time to recreate or source data).
 
 ## vital-it (chuv one)
+* login via chuv
 * `srueger@10.224.38.7`
 * `bsub -m "cpt01 cpt02"`
+* pw: usual start + mami village
 
 ## beadstudio
 `130.223.204.107`
