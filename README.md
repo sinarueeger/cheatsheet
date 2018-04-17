@@ -2,37 +2,27 @@
 
 Scripts that serve to look up stuff that I always forget.
 
-* Old and new snippets
-* Templates for latex
-* useR 2011 notes
 
-## Server related
-```
-qstat -f -u '*'
-```
-```
-ps -aux | grep srueger
-```
+## howto snippets
 
-## Backups
-### HPC1 2 HPC1
-```
-rsync -avr /data/sgg/sina/projects/ /chuvdatarc/srueger/SGG/COMMUN/Sina/backups/
-rsync -avr /data/sgg/sina/teaching/ /chuvdatarc/srueger/SGG/COMMUN/Sina/backups/
-```
 
-### Laptop 2 HPC1
-```
-scp -r /Users/admin/Documents/Work/Projects/tagging/documentation/document_article/* srueger@hpc1.chuv.ch:/data/sgg/sina/backup.article
-```
-```
-scp -r  /Users/admin/Documents/Studies/Reports/final-thesis/* srueger@hpc1.chuv.ch:/data/sgg/sina/backup.thesis
-```
+## workflow snippets
+- `workflow_data_sanity.R`: usage of `RUnit` package
+- `workflow_lintr.R`: applying best practices in coding
+- `workflow_testthat.R`: a bit old, for `testthat` check the header of the `cookbook/functions.R`
 
-### macbook 2 harddisk
->> MANUEL!
+## sh or txt files
+- `bash_snippets.txt` 
+- `howto_screen.txt`: use a screen on a server
+- `howto_vim.txt`: if the unlikely event would occur
+- `howto_convert_pdf.sh`: using imagemagick
 
->> old was this one:
-```
-scp -r /Users/admin/Documents/* sina@neve.unil.ch:/h-sara0/sina/backup_mac/
-```
+## R files
+- `howto_access_ukbb.R`	 
+- `howto_grid_qqplot.R`
+- `howto_annotation_snps.R`  
+- `howto_mixed_models_in_R.R`    
+- `howto_catchtry.R` 
+- `howto_power_calc_xiaoying.R`  
+- `howto_fastVCF.R`		 
+- `howto_load_data_test.R`
