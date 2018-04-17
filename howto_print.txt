@@ -1,7 +1,0 @@
-pdfnup --nup 2x1 --suffix '2x1' YOUR_PDF.pdf
-
-cat YOUR_PDF_FILE.pdf | ssh -i ~/.ssh/print_rsa -p 56734 print@erdos.ucd.ie bw
-cat YOUR_PDF_FILE.pdf | ssh -i ~/.ssh/print_rsa -p 56734 print@erdos.ucd.ie col
-
-not needed:
-gs -dNOPAUSE -dBATCH -sDEVICE=ljet4d -dDuplex -sPAPERSIZE=a4 -sOutputFile=duplex.pcl YOUR_PDF.pdf
