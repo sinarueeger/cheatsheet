@@ -1,4 +1,0 @@
-Ictrl+o to exit the insert mode
-shift+q to enter the exit mode
-then q!+enter to quit without saving
-or wq+enter to save and quit 
