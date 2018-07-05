@@ -2,7 +2,7 @@
 
 
 ## workflow snippets
-- `workflow_data_sanity.R`: usage of `RUnit` package
+- [`workflow_data_sanity.R`](workflow_data_sanity.R): usage of `RUnit` package
 - `workflow_lintr.R`: applying best practices in coding
 - `workflow_testthat.R`: a bit old, for `testthat` check the header of the `cookbook/functions.R`
 
